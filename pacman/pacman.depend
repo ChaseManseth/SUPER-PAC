@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1509068314 source:c:\users\zacsh\desktop\pacman\main.cpp
+	<iostream>
+	"pacman.h"
+
+1509068423 source:c:\users\zacsh\desktop\pacman\pacman.cpp
+	"pacman.h"
+
+1509068331 c:\users\zacsh\desktop\pacman\pacman.h
+	"point.h"
+	"SDL_Plotter.h"
+	<cmath>
+
+1509066312 c:\users\zacsh\desktop\pacman\point.h
+
+1508887330 c:\users\zacsh\desktop\pacman\sdl_plotter.h
+	<SDL.h>
+	<SDL_mixer.h>
+	<string.h>
+	<iostream>
+	<string>
+	<string.h>
+	<map>
+
