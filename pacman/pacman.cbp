@@ -32,7 +32,16 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="SDL_Plotter.h" />
+		<Unit filename="circle.cpp" />
+		<Unit filename="circle.h" />
+		<Unit filename="color.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="pacman.cpp" />
+		<Unit filename="pacman.h" />
+		<Unit filename="pellet.cpp" />
+		<Unit filename="pellet.h" />
+		<Unit filename="point.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

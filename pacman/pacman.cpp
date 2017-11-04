@@ -1,13 +1,17 @@
 #include "pacman.h"
+#include "tile.h"
 
-Pacman::Pacman()
+Pacman::Pacman(int row, int col)
 {
+    r = row;
+    c = col;
     lives = 3;
     speed = 1;
-    radius = 20;
+    radius = 12;
     points = 0;
     direction = RIGHT;
-    center = Point(200,200);
+    waka = CLOSED_WAKA;
+    center = Point(13 * SIZE_TILE + 12,26 * SIZE_TILE + 12);
 }
 
 int Pacman::getLives()
@@ -17,6 +21,10 @@ int Pacman::getLives()
 int Pacman::getSpeed()
 {
     return speed;
+}
+int Pacman::getWaka()
+{
+    return waka;
 }
 int Pacman::getDirection()
 {
@@ -30,14 +38,14 @@ int Pacman::getPoints()
 {
     return points;
 }
-Point Pacman::getCenter()
-{
-    return center;
-}
 
 void Pacman::setLives(int l)
 {
     lives = l;
+}
+void Pacman::setWaka(int w)
+{
+    waka = w;
 }
 void Pacman::setState(int st)
 {
@@ -60,11 +68,12 @@ void Pacman::setCenter(Point c)
     center = c;
 }
 
-void Pacman::movePosition(int d)
+void Pacman::movePosition(int d, const Tile map[36][28])
 {
     switch(getDirection())
     {
-        case RIGHT: setCenter(Point(center.x + 1, center.y));
+        case RIGHT:
+                    setCenter(Point(center.x + 1, center.y));
                     break;
         case LEFT:  setCenter(Point(center.x - 1, center.y));
                     break;
@@ -82,12 +91,12 @@ void Pacman::erasePac(SDL_Plotter& g)
         {
             if(sqrt(x * x + y * y) <= radius)
             {
-                g.plotPixel(center.x + x, center.y + y, 255, 255, 255);
+                g.plotPixel(center.x + x, center.y + y, 0, 0, 0);
             }
         }
     }
 }
-void Pacman::drawPac(SDL_Plotter& g, int wakaState)
+void Pacman::drawPac(SDL_Plotter& g)
 {
     for(int x = -radius; x <= radius; x++)
     {
@@ -97,16 +106,6 @@ void Pacman::drawPac(SDL_Plotter& g, int wakaState)
             {
                 g.plotPixel(center.x + x, center.y + y, 255, 238, 0);
             }
-        }
-    }
-}
-void Pacman::drawWaka(SDL_Plotter& g)
-{
-    for(int x = 0; x <= radius; x++)
-    {
-        for(int y = 0; y <= radius; y++)
-        {
-                g.plotPixel(center.x + x, center.y + y, 255, 255, 255);
         }
     }
 }

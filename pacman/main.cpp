@@ -1,13 +1,38 @@
 #include <iostream>
+#include <fstream>
 #include "pacman.h"
-
+#include "tile.h"
 
 using namespace std;
 
 int main(int argc, char** argv)
 {
-    SDL_Plotter g(800,800);
-    Pacman pac;
+    ifstream inData;
+    bool readValue;
+    SDL_Plotter g(900,700);
+    Tile map[36][28];
+
+    inData.open("mapText.txt");
+
+    for(int r = 0; r < 36; r++)
+    {
+        for(int c = 0; c < 28; c++)
+        {
+            map[r][c] = Tile(r, c, true);
+        }
+    }
+    for(int r = 0; r < 36; r++)
+    {
+        for(int c = 0; c < 28; c++)
+        {
+            inData >> readValue;
+            map[r][c].setPath(readValue);
+        }
+    }
+
+
+    Pacman pac(26, 13);
+
 
     char key;
 
@@ -16,13 +41,19 @@ int main(int argc, char** argv)
 
     while(!g.getQuit())
     {
-        pac.drawPac(g, 1 /*implement wakastate*/);
-        pac.drawWaka(g);
+        for(int r = 0; r < 36; r++)
+        {
+            for(int c = 0; c < 28; c++)
+            {
+                map[r][c].drawTile(g);
+            }
+        }
+        pac.drawPac(g);
         g.update();
         g.Sleep(10);
 
         pac.erasePac(g);
-        pac.movePosition(pac.getDirection());
+        pac.movePosition(pac.getDirection(), map);
 
 
         //draw(cout, x1, y1, x2, y2);
