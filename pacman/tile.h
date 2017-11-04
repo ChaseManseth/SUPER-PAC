@@ -3,6 +3,7 @@
 
 #include "SDL_Plotter.h"
 #include "point.h"
+#include "pellet.h"
 
 using namespace std;
 
@@ -15,12 +16,16 @@ class Tile
         int posX, posY;
         Point center;
         bool isValid;
+        Pellet pel;
     public:
         Tile(int row, int col, bool isP);
         Tile();
         int getRow();
         int getCol();
+        int getPosX();
+        int getPosY();
         Point getCenter();
+        Pellet getPel();
 
         void setRow(int row);
         void setCol(int col);

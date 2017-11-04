@@ -19,7 +19,7 @@ class Pacman
         int radius;
         int state;
         int speed;
-        int points;
+        int score;
         int waka;
         int direction;
 
@@ -31,7 +31,7 @@ class Pacman
         int getWaka();
         int getSpeed();
         int getDirection();
-        int getPoints();
+        int getScore();
 
         void setLives(int l);
         void setState(int st);
@@ -39,9 +39,10 @@ class Pacman
         void setSpeed(int s);
         void setWaka(int w);
         void setDirection(int d);
-        void setPoints(int p);
+        void setScore(int p);
 
-        void movePosition(int d, const Tile map[36][28]);
+        void eat(Tile map[36][28]);
+        void movePosition(int d, Tile map[36][28], SDL_Plotter& g);
         void erasePac(SDL_Plotter& g);
         void drawPac(SDL_Plotter& g);
 

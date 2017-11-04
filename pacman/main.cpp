@@ -3,6 +3,7 @@
 #include "pacman.h"
 #include "tile.h"
 
+
 using namespace std;
 
 int main(int argc, char** argv)
@@ -27,12 +28,19 @@ int main(int argc, char** argv)
         {
             inData >> readValue;
             map[r][c].setPath(readValue);
+            map[r][c].getPel().setActive();
+        }
+    }
+    for(int r = 0; r < 36; r++)
+    {
+        for(int c = 0; c < 28; c++)
+        {
+            map[r][c].drawTile(g);
         }
     }
 
-
     Pacman pac(26, 13);
-
+    pac.drawPac(g);
 
     char key;
 
@@ -49,11 +57,12 @@ int main(int argc, char** argv)
             }
         }
         pac.drawPac(g);
+        pac.eat(map);
         g.update();
-        g.Sleep(10);
 
-        pac.erasePac(g);
-        pac.movePosition(pac.getDirection(), map);
+
+
+
 
 
         //draw(cout, x1, y1, x2, y2);
@@ -65,12 +74,16 @@ int main(int argc, char** argv)
             switch(key)
             {
                 case RIGHT_ARROW: pac.setDirection(RIGHT);
+                                  pac.movePosition(pac.getDirection(), map, g);
                                   break;
                 case LEFT_ARROW:  pac.setDirection(LEFT);
+                                  pac.movePosition(pac.getDirection(), map, g);
                                   break;
                 case UP_ARROW:    pac.setDirection(UP);
+                                  pac.movePosition(pac.getDirection(), map, g);
                                   break;
                 case DOWN_ARROW:  pac.setDirection(DOWN);
+                                  pac.movePosition(pac.getDirection(), map, g);
                                   break;
             }
         }

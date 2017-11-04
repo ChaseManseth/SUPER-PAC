@@ -25,9 +25,21 @@ int Tile::getCol()
 {
     return c;
 }
+int Tile::getPosX()
+{
+    return posX;
+}
+int Tile:: getPosY()
+{
+    return posY;
+}
 Point Tile::getCenter()
 {
     return center;
+}
+
+Pellet Tile::getPel(){
+    return pel;
 }
 
 void Tile::setRow(int row)
@@ -57,6 +69,7 @@ void Tile::drawTile(SDL_Plotter& g)
         {
             if(isPath())
             {
+                pel.draw(getCenter(), g);
                 g.plotPixel(col, row, 0, 0, 0);
             }
             else if(!isPath())

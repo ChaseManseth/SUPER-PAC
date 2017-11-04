@@ -1,15 +1,16 @@
 # depslib dependency file v1.0
-1509766680 source:c:\users\zacsh\desktop\pacman\main.cpp
+1509819029 source:c:\users\zacsh\desktop\pacman\main.cpp
 	<iostream>
 	<fstream>
 	"pacman.h"
 	"tile.h"
 
-1509766620 source:c:\users\zacsh\desktop\pacman\pacman.cpp
+1509818940 source:c:\users\zacsh\desktop\pacman\pacman.cpp
 	"pacman.h"
 	"tile.h"
+	<cstdlib>
 
-1509766482 c:\users\zacsh\desktop\pacman\pacman.h
+1509818415 c:\users\zacsh\desktop\pacman\pacman.h
 	"point.h"
 	"SDL_Plotter.h"
 	"tile.h"
@@ -39,10 +40,16 @@
 
 1508944812 c:\users\zacsh\desktop\pacman\color.h
 
-1509766061 c:\users\zacsh\desktop\pacman\tile.h
+1509818415 c:\users\zacsh\desktop\pacman\tile.h
 	"SDL_Plotter.h"
 	"point.h"
+	"pellet.h"
 
-1509766060 source:c:\users\zacsh\desktop\pacman\tile.cpp
+1509818678 source:c:\users\zacsh\desktop\pacman\tile.cpp
 	"tile.h"
+
+1509819101 c:\users\zacsh\desktop\pacman\pellet.h
+	"point.h"
+	"tile.h"
+	"SDL_Plotter.h"
 
