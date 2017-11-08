@@ -12,15 +12,15 @@ struct Pellet
     bool active;
     Pellet(){
         row = col = 0;
-        active = false;
+        active = true;
     }
     Pellet(int r, int c){
         row = r;
         col = c;
-        active = false;
+        active = true;
     }
     void draw(Point p, SDL_Plotter& g){
-        if(!active){
+        if(active){
             for(int i = 0; i < 3; i++){
                 for(int k = 0; k < 3; k++){
                     g.plotPixel(p.x+i,p.y+k, 255, 255, 255);
@@ -35,8 +35,8 @@ struct Pellet
             }
         }
     }
-    void setActive(){
-        active = true;
+    void setActive(bool b){
+        active = b;
     }
 
 

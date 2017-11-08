@@ -28,7 +28,6 @@ int main(int argc, char** argv)
         {
             inData >> readValue;
             map[r][c].setPath(readValue);
-            map[r][c].getPel().setActive();
         }
     }
     for(int r = 0; r < 36; r++)

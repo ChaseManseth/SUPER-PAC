@@ -42,6 +42,10 @@ Pellet Tile::getPel(){
     return pel;
 }
 
+void Tile::setPel() {
+    pel.setActive(false);
+}
+
 void Tile::setRow(int row)
 {
     r = row;

@@ -28,6 +28,7 @@ class Tile
         Pellet getPel();
 
         void setRow(int row);
+        void setPel();
         void setCol(int col);
         void setPath(bool isP);
 

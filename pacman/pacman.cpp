@@ -1,5 +1,6 @@
 #include "pacman.h"
 #include "tile.h"
+#include <iostream>
 #include <cstdlib>
 
 Pacman::Pacman(int row, int col)
@@ -70,8 +71,11 @@ void Pacman::setCenter(Point c)
 }
 void Pacman::eat(Tile map[36][28]){
     if(map[r][c].getPel().active){
-        map[r][c].getPel().setActive();
+        map[r][c].setPel();
+
         score+=500;
+
+        cout << score;
     }
 
 }
