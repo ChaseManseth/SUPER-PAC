@@ -1,0 +1,186 @@
+# depslib dependency file v1.0
+1510382037 source:c:\users\zacsh\desktop\pacman\main.cpp
+	<iostream>
+	<fstream>
+	"pacman.h"
+	"tile.h"
+	"ghosts.h"
+
+1510379200 source:c:\users\zacsh\desktop\pacman\pacman.cpp
+	"pacman.h"
+	"tile.h"
+	<iostream>
+	<cstdlib>
+
+1510377208 c:\users\zacsh\desktop\pacman\pacman.h
+	"point.h"
+	"SDL_Plotter.h"
+	"tile.h"
+	<cmath>
+
+1510365000 c:\users\zacsh\desktop\pacman\point.h
+
+1510373824 c:\users\zacsh\desktop\pacman\sdl_plotter.h
+	<SDL.h>
+	<SDL_mixer.h>
+	<string.h>
+	<iostream>
+	<string>
+	<string.h>
+	<map>
+
+1509111867 source:c:\users\zacsh\desktop\pacman\pellet.cpp
+
+1510365000 source:c:\users\zacsh\desktop\pacman\circle.cpp
+	"circle.h"
+
+1510365000 c:\users\zacsh\desktop\pacman\circle.h
+	"point.h"
+	"color.h"
+	"SDL_Plotter.h"
+	<cmath>
+
+1510365000 c:\users\zacsh\desktop\pacman\color.h
+
+1510365000 c:\users\zacsh\desktop\pacman\tile.h
+	"SDL_Plotter.h"
+	"point.h"
+	"pellet.h"
+
+1510365000 source:c:\users\zacsh\desktop\pacman\tile.cpp
+	"tile.h"
+
+1510365000 c:\users\zacsh\desktop\pacman\pellet.h
+	"point.h"
+	"tile.h"
+	"SDL_Plotter.h"
+
+1509812082 source:e:\super-pac-master\pacman\circle.cpp
+	"circle.h"
+
+1509812082 e:\super-pac-master\pacman\circle.h
+	"point.h"
+	"color.h"
+	"SDL_Plotter.h"
+	<cmath>
+
+1509812082 e:\super-pac-master\pacman\point.h
+
+1509812082 e:\super-pac-master\pacman\color.h
+
+1510151800 e:\super-pac-master\pacman\sdl_plotter.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<string.h>
+	<iostream>
+	<string>
+	<string.h>
+	<map>
+
+1510152158 source:e:\super-pac-master\pacman\main.cpp
+	<iostream>
+	<fstream>
+	"pacman.h"
+	"tile.h"
+
+1509812082 e:\super-pac-master\pacman\pacman.h
+	"point.h"
+	"SDL_Plotter.h"
+	"tile.h"
+	<cmath>
+
+1510153064 e:\super-pac-master\pacman\tile.h
+	"SDL_Plotter.h"
+	"point.h"
+	"pellet.h"
+
+1510152816 e:\super-pac-master\pacman\pellet.h
+	"point.h"
+	"tile.h"
+	"SDL_Plotter.h"
+
+1510153102 source:e:\super-pac-master\pacman\pacman.cpp
+	"pacman.h"
+	"tile.h"
+	<iostream>
+	<cstdlib>
+
+1510153064 source:e:\super-pac-master\pacman\tile.cpp
+	"tile.h"
+
+1510362575 source:h:\pacman\circle.cpp
+	"circle.h"
+
+1510362575 h:\pacman\circle.h
+	"point.h"
+	"color.h"
+	"SDL_Plotter.h"
+	<cmath>
+
+1510362575 h:\pacman\point.h
+
+1510362575 h:\pacman\color.h
+
+1510362575 h:\pacman\sdl_plotter.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<string.h>
+	<iostream>
+	<string>
+	<string.h>
+	<map>
+
+1510371575 source:h:\pacman\main.cpp
+	<iostream>
+	<fstream>
+	"pacman.h"
+	"tile.h"
+	"ghosts.h"
+
+1510367142 h:\pacman\pacman.h
+	"point.h"
+	"SDL_Plotter.h"
+	"tile.h"
+	<cmath>
+
+1510362575 h:\pacman\tile.h
+	"SDL_Plotter.h"
+	"point.h"
+	"pellet.h"
+
+1510362575 h:\pacman\pellet.h
+	"point.h"
+	"tile.h"
+	"SDL_Plotter.h"
+
+1510371258 source:h:\pacman\pacman.cpp
+	"pacman.h"
+	"tile.h"
+	<iostream>
+	<cstdlib>
+
+1510363942 source:h:\pacman\tile.cpp
+	"tile.h"
+
+1510369565 source:h:\pacman\ghosts.cpp
+	"ghosts.h"
+
+1510369311 h:\pacman\ghosts.h
+	"pacman.h"
+	"SDL_Plotter.h"
+	"tile.h"
+	"color.h"
+	"point.h"
+	<cmath>
+
+1510381971 source:c:\users\zacsh\desktop\pacman\ghosts.cpp
+	"ghosts.h"
+
+1510381971 c:\users\zacsh\desktop\pacman\ghosts.h
+	"pacman.h"
+	"SDL_Plotter.h"
+	"tile.h"
+	"color.h"
+	"point.h"
+	<cmath>
+
