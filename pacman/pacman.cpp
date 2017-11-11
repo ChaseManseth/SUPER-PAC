@@ -80,6 +80,14 @@ void Pacman::setCenter(Point c)
 {
     center = c;
 }
+void Pacman::setR(int row)
+{
+    r = row;
+}
+void Pacman::setC(int col)
+{
+    c = col;
+}
 void Pacman::eat(Tile map[36][28]){
     if(map[r][c].getPel().active){
         map[r][c].setPel();

@@ -36,6 +36,8 @@ class Pacman
         int getR();
         int getC();
 
+        void setR(int row);
+        void setC(int col);
         void setLives(int l);
         void setState(int st);
         void setCenter(Point c);

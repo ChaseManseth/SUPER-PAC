@@ -41,6 +41,14 @@ int main(int argc, char** argv)
     Color blink(255,20,20);
     Pacman pac(26,13);
     Ghost Blinky(blink, map);
+
+    Color pink(255,102,178);
+    Ghost pinky(pink, map);
+    pinky.setR(14);
+    pinky.setC(18);
+    pinky.setCenter(map[14][16].getCenter());
+
+
     pac.drawPac(g);
 
 
@@ -53,10 +61,43 @@ int main(int argc, char** argv)
     {
         for(int i = 0; i < 50; i++)
         {
+            pinky.erase(g, map);
+            map[pinky.getR()][pinky.getC()].drawTile(g);
+            pinky.target(pac);
+            pinky.move(map, g);
+            pinky.draw(g, map);
+            if(pinky.isCollide(map, pac, g))
+            {
+                Blinky.erase(g, map);
+                pinky.erase(g, map);
+
+                Blinky.setR(14);
+                Blinky.setC(9);
+                Blinky.setCenter(map[14][13].getCenter());
+
+                pinky.setR(14);
+                pinky.setC(18);
+                pinky.setCenter(map[14][18].getCenter());
+            }
+
             Blinky.erase(g, map);
-            Blinky.move(map, g);
             map[Blinky.getR()][Blinky.getC()].drawTile(g);
+            Blinky.target(pac);
+            Blinky.move(map, g);
             Blinky.draw(g, map);
+            if(Blinky.isCollide(map, pac, g))
+            {
+                Blinky.erase(g, map);
+                pinky.erase(g, map);
+
+                Blinky.setR(14);
+                Blinky.setC(9);
+                Blinky.setCenter(map[14][13].getCenter());
+
+                pinky.setR(14);
+                pinky.setC(18);
+                pinky.setCenter(map[14][18].getCenter());
+            }
             pac.eat(map);
             pac.drawPac(g);
             g.update();
@@ -110,9 +151,8 @@ int main(int argc, char** argv)
             {
                 pac.erasePac(g);
                 pac.movePosition(pac.getDirection(), map, g);
-
+                Blinky.target(pac);
             }
-
             g.Sleep(15);
         }
 

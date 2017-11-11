@@ -1,18 +1,18 @@
 # depslib dependency file v1.0
-1510382037 source:c:\users\zacsh\desktop\pacman\main.cpp
+1510423343 source:c:\users\zacsh\desktop\pacman\main.cpp
 	<iostream>
 	<fstream>
 	"pacman.h"
 	"tile.h"
 	"ghosts.h"
 
-1510379200 source:c:\users\zacsh\desktop\pacman\pacman.cpp
+1510421165 source:c:\users\zacsh\desktop\pacman\pacman.cpp
 	"pacman.h"
 	"tile.h"
 	<iostream>
 	<cstdlib>
 
-1510377208 c:\users\zacsh\desktop\pacman\pacman.h
+1510421165 c:\users\zacsh\desktop\pacman\pacman.h
 	"point.h"
 	"SDL_Plotter.h"
 	"tile.h"
@@ -42,7 +42,7 @@
 
 1510365000 c:\users\zacsh\desktop\pacman\color.h
 
-1510365000 c:\users\zacsh\desktop\pacman\tile.h
+1510419816 c:\users\zacsh\desktop\pacman\tile.h
 	"SDL_Plotter.h"
 	"point.h"
 	"pellet.h"
@@ -173,13 +173,14 @@
 	"point.h"
 	<cmath>
 
-1510381971 source:c:\users\zacsh\desktop\pacman\ghosts.cpp
+1510423707 source:c:\users\zacsh\desktop\pacman\ghosts.cpp
 	"ghosts.h"
 
-1510381971 c:\users\zacsh\desktop\pacman\ghosts.h
+1510422274 c:\users\zacsh\desktop\pacman\ghosts.h
 	"pacman.h"
 	"SDL_Plotter.h"
 	"tile.h"
+	<queue>
 	"color.h"
 	"point.h"
 	<cmath>
