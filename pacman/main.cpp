@@ -68,6 +68,7 @@ int main(int argc, char** argv)
             pinky.draw(g, map);
             if(pinky.isCollide(map, pac, g))
             {
+                g.Sleep(1000);
                 Blinky.erase(g, map);
                 pinky.erase(g, map);
 
@@ -87,6 +88,7 @@ int main(int argc, char** argv)
             Blinky.draw(g, map);
             if(Blinky.isCollide(map, pac, g))
             {
+                g.Sleep(1000);
                 Blinky.erase(g, map);
                 pinky.erase(g, map);
 

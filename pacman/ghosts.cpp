@@ -56,7 +56,23 @@ bool Ghost::isCollide(Tile map[36][28], Pacman& p, SDL_Plotter& g)
 
         p.setCenter(map[26][13].getCenter());
 
+        return true;
     }
+
+    if((getCenter().x + 11 >= p.getCenter().x - 11 && getCenter().x - 11 <= p.getCenter().x - 11 && r == p.getR()) || //right
+       (getCenter().x - 11 <= p.getCenter().x + 11 && getCenter().x + 11 >= p.getCenter().x + 11 && r == p.getR()) || //left
+       (getCenter().y - 11 <= p.getCenter().y + 11 && getCenter().y + 11 >= p.getCenter().y - 11 && c == p.getC()) || //up
+       (getCenter().y + 11 >= p.getCenter().y - 11 && getCenter().y - 11 <= p.getCenter().y + 11 && c == p.getC()))   //down
+    {
+        p.setR(26);
+        p.setC(13);
+
+        p.setCenter(map[26][13].getCenter());
+
+        return true;
+    }
+
+    return false;
 }
 
 

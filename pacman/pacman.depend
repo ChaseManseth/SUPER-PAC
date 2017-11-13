@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1510423343 source:c:\users\zacsh\desktop\pacman\main.cpp
+1510542627 source:c:\users\zacsh\desktop\pacman\main.cpp
 	<iostream>
 	<fstream>
 	"pacman.h"
@@ -173,7 +173,7 @@
 	"point.h"
 	<cmath>
 
-1510423707 source:c:\users\zacsh\desktop\pacman\ghosts.cpp
+1510542521 source:c:\users\zacsh\desktop\pacman\ghosts.cpp
 	"ghosts.h"
 
 1510422274 c:\users\zacsh\desktop\pacman\ghosts.h
