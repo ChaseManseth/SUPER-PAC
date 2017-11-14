@@ -1,24 +1,24 @@
 # depslib dependency file v1.0
-1510542627 source:c:\users\zacsh\desktop\pacman\main.cpp
+1510703234 source:c:\users\zacsh\desktop\pacman\main.cpp
 	<iostream>
 	<fstream>
 	"pacman.h"
 	"tile.h"
 	"ghosts.h"
 
-1510421165 source:c:\users\zacsh\desktop\pacman\pacman.cpp
+1510703273 source:c:\users\zacsh\desktop\pacman\pacman.cpp
 	"pacman.h"
 	"tile.h"
 	<iostream>
 	<cstdlib>
 
-1510421165 c:\users\zacsh\desktop\pacman\pacman.h
+1510703234 c:\users\zacsh\desktop\pacman\pacman.h
 	"point.h"
 	"SDL_Plotter.h"
 	"tile.h"
 	<cmath>
 
-1510365000 c:\users\zacsh\desktop\pacman\point.h
+1510703234 c:\users\zacsh\desktop\pacman\point.h
 
 1510373824 c:\users\zacsh\desktop\pacman\sdl_plotter.h
 	<SDL.h>
@@ -31,26 +31,26 @@
 
 1509111867 source:c:\users\zacsh\desktop\pacman\pellet.cpp
 
-1510365000 source:c:\users\zacsh\desktop\pacman\circle.cpp
+1510703273 source:c:\users\zacsh\desktop\pacman\circle.cpp
 	"circle.h"
 
-1510365000 c:\users\zacsh\desktop\pacman\circle.h
+1510703234 c:\users\zacsh\desktop\pacman\circle.h
 	"point.h"
 	"color.h"
 	"SDL_Plotter.h"
 	<cmath>
 
-1510365000 c:\users\zacsh\desktop\pacman\color.h
+1510703273 c:\users\zacsh\desktop\pacman\color.h
 
-1510419816 c:\users\zacsh\desktop\pacman\tile.h
+1510703273 c:\users\zacsh\desktop\pacman\tile.h
 	"SDL_Plotter.h"
 	"point.h"
 	"pellet.h"
 
-1510365000 source:c:\users\zacsh\desktop\pacman\tile.cpp
+1510703273 source:c:\users\zacsh\desktop\pacman\tile.cpp
 	"tile.h"
 
-1510365000 c:\users\zacsh\desktop\pacman\pellet.h
+1510703234 c:\users\zacsh\desktop\pacman\pellet.h
 	"point.h"
 	"tile.h"
 	"SDL_Plotter.h"
@@ -173,10 +173,10 @@
 	"point.h"
 	<cmath>
 
-1510542521 source:c:\users\zacsh\desktop\pacman\ghosts.cpp
+1510703273 source:c:\users\zacsh\desktop\pacman\ghosts.cpp
 	"ghosts.h"
 
-1510422274 c:\users\zacsh\desktop\pacman\ghosts.h
+1510703273 c:\users\zacsh\desktop\pacman\ghosts.h
 	"pacman.h"
 	"SDL_Plotter.h"
 	"tile.h"
