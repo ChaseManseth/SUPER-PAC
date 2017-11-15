@@ -59,7 +59,7 @@ class Pacman
         void setDirection(int d);
         void setScore(int p);
 
-        void eat(Tile map[36][28]);
+        bool eat(Tile map[36][28]);
         void movePosition(int d, Tile map[36][28], SDL_Plotter& g);
         void erasePac(SDL_Plotter& g);
         void drawPac(SDL_Plotter& g);

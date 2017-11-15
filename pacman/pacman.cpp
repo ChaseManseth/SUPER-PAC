@@ -99,14 +99,17 @@ void Pacman::setC(int col)
 {
     c = col;
 }
-void Pacman::eat(Tile map[36][28]){
+bool Pacman::eat(Tile map[36][28]){
     if(map[r][c].getPel().active){
         map[r][c].setPel();
 
         score+=500;
 
         cout << score;
+
+        return true;
     }
+    return false;
 
 }
 
@@ -202,7 +205,7 @@ void Pacman::drawPac(SDL_Plotter& g)
     {
         if(waka == HALF2 || waka == HALF_WAKA)
         {
-            for(int x = center.x - 3; x <= center.x + 3; x++)
+            for(double x = center.x - 3; x <= center.x + 3; x++)
             {
                 Line l = Line(center, Point(x, center.y - radius));
 
@@ -211,7 +214,7 @@ void Pacman::drawPac(SDL_Plotter& g)
         }
         else
         {
-            for(int x = center.x - 10; x <= center.x + 10; x++)
+            for(double x = center.x - 10; x <= center.x + 10; x++)
             {
                 Line l = Line(center, Point(x, center.y - radius));
 

@@ -20,9 +20,20 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
+    Mix_Chunk *gEat = NULL;
+    Mix_Music *gAmbient = NULL;
     ifstream inData;
     bool readValue;
     SDL_Plotter g(900,700);
+
+    //initialize audio functionality
+    SDL_Init(SDL_INIT_AUDIO);
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+
+    //initialize sound files
+    gEat = Mix_LoadWAV("wakka_wakka1.wav");
+    gAmbient = Mix_LoadMUS("ghosts_ambient.wav");
+
     Tile map[36][28];
 
     inData.open("mapText.txt");
@@ -67,16 +78,17 @@ int main(int argc, char** argv)
 
     int speed = 1;
     const int MAX_SPEED = 10;
+    Mix_PlayMusic(gAmbient, -1 );
 
     while(!g.getQuit())
     {
-        for(int i = 0; i < 50; i++)
+        for(int i = 0; i < 85; i++)
         {
-            if(pac.getWaka() == HALF2 && i % 15 == 0)
+            if(pac.getWaka() == HALF2 && i % 10 == 0)
             {
                 pac.setWaka(CLOSED_WAKA);
             }
-            else if(i % 15 == 0)
+            else if(i % 10 == 0)
             {
                 pac.setWaka(pac.getWaka() + 1);
             }
@@ -119,7 +131,10 @@ int main(int argc, char** argv)
                 pinky.setC(18);
                 pinky.setCenter(map[14][18].getCenter());
             }
-            pac.eat(map);
+            if(pac.eat(map))
+            {
+                Mix_PlayChannel( -1, gEat, 0 );
+            }
             pac.drawPac(g);
             g.update();
 

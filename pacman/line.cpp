@@ -95,7 +95,7 @@ void Line::drawLine(SDL_Plotter& g, Color c)
             {
                 int y = m * x + b;
 
-                g.plotPixel(static_cast<int>(x), y, c.R, c.G, c.B);
+                g.plotPixel(x, y, c.R, c.G, c.B);
             }
         }
         else
@@ -104,7 +104,7 @@ void Line::drawLine(SDL_Plotter& g, Color c)
             {
                 int y = m * x + b;
 
-                g.plotPixel(static_cast<int>(x), y, c.R, c.G, c.B);
+                g.plotPixel(x, y, c.R, c.G, c.B);
 
             }
         }
