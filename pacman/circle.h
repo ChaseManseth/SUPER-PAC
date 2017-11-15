@@ -14,6 +14,7 @@
 
 #include "point.h"
 #include "color.h"
+#include "line.h"
 #include "SDL_Plotter.h"
 #include <cmath>
 

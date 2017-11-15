@@ -197,4 +197,89 @@ void Pacman::drawPac(SDL_Plotter& g)
             }
         }
     }
+
+    if(direction == UP && waka != CLOSED_WAKA)
+    {
+        if(waka == HALF2 || waka == HALF_WAKA)
+        {
+            for(int x = center.x - 3; x <= center.x + 3; x++)
+            {
+                Line l = Line(center, Point(x, center.y - radius));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+        else
+        {
+            for(int x = center.x - 10; x <= center.x + 10; x++)
+            {
+                Line l = Line(center, Point(x, center.y - radius));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+    }
+    else if(direction == RIGHT && waka != CLOSED_WAKA)
+    {
+        if(waka == HALF2 || waka == HALF_WAKA)
+        {
+            for(int y = center.y - 3; y <= center.y + 3; y++)
+            {
+                Line l = Line(center, Point(center.x + radius, y));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+        else
+        {
+            for(int y = center.y - 10; y <= center.y + 10; y++)
+            {
+                Line l = Line(center, Point(center.x + radius, y));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+    }
+    else if(direction == LEFT && waka != CLOSED_WAKA)
+    {
+        if(waka == HALF2 || waka == HALF_WAKA)
+        {
+            for(int y = center.y - 3; y <= center.y + 3; y++)
+            {
+                Line l = Line(center, Point(center.x - radius, y));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+        else
+        {
+            for(int y = center.y - 10; y <= center.y + 10; y++)
+            {
+                Line l = Line(center, Point(center.x - radius, y));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+    }
+    else if(direction == DOWN && waka != CLOSED_WAKA)
+    {
+        if(waka == HALF2 || waka == HALF_WAKA)
+        {
+            for(int x = center.x - 3; x <= center.x + 3; x++)
+            {
+                Line l = Line(center, Point(x, center.y + radius));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+        else
+        {
+            for(int x = center.x - 10; x <= center.x + 10; x++)
+            {
+                Line l = Line(center, Point(x, center.y + radius));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+    }
 }

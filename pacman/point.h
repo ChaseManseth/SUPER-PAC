@@ -14,14 +14,14 @@
 
 struct Point
 {
-    int x, y;
+    double x, y;
 
     Point()
     {
         x = y = 0;
     }
 
-    Point(int a, int b)
+    Point(double a, double b)
     {
         x = a;
         y = b;

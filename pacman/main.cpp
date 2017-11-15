@@ -72,6 +72,14 @@ int main(int argc, char** argv)
     {
         for(int i = 0; i < 50; i++)
         {
+            if(pac.getWaka() == HALF2 && i % 15 == 0)
+            {
+                pac.setWaka(CLOSED_WAKA);
+            }
+            else if(i % 15 == 0)
+            {
+                pac.setWaka(pac.getWaka() + 1);
+            }
             pinky.erase(g, map);
             map[pinky.getR()][pinky.getC()].drawTile(g);
             pinky.target(pac);

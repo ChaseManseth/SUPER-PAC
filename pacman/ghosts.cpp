@@ -6,7 +6,7 @@
 * version of pacman.
 * Due Date: 11/29/2017
 * Date Created: 11/1/2017
-* Date Last Modified: 11/11/2017
+* Date Last Modified: 11/12/2017
 */
 
 #include "ghosts.h"
