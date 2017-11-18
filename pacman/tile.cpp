@@ -1,3 +1,14 @@
+/*
+* Author: Zachary Steudel, Chase Manseth, Meghan Bibb,
+* Will Rhoden, Bailey Stone
+* Assignment Title:  Pacman Group Project
+* Assignment Description: User can play a faithfully recreated
+* version of pacman.
+* Due Date: 11/29/2017
+* Date Created: 11/1/2017
+* Date Last Modified: 11/11/2017
+*/
+
 #include "tile.h"
 
 Tile::Tile()
@@ -78,7 +89,8 @@ void Tile::drawTile(SDL_Plotter& g)
             }
             else if(!isPath())
             {
-                g.plotPixel(col, row, 20, 20, 220);
+                g.plotPixel(col, row, 150, 150, 255);
+
             }
         }
     }

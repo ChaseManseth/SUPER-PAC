@@ -36,12 +36,17 @@
 		<Unit filename="circle.cpp" />
 		<Unit filename="circle.h" />
 		<Unit filename="color.h" />
+		<Unit filename="ghosts.cpp" />
+		<Unit filename="ghosts.h" />
+		<Unit filename="line.cpp" />
+		<Unit filename="line.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="pacman.cpp" />
 		<Unit filename="pacman.h" />
-		<Unit filename="pellet.cpp" />
 		<Unit filename="pellet.h" />
 		<Unit filename="point.h" />
+		<Unit filename="tile.cpp" />
+		<Unit filename="tile.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

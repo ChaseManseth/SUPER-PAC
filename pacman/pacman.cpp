@@ -1,3 +1,14 @@
+/*
+* Author: Zachary Steudel, Chase Manseth, Meghan Bibb,
+* Will Rhoden, Bailey Stone
+* Assignment Title:  Pacman Group Project
+* Assignment Description: User can play a faithfully recreated
+* version of pacman.
+* Due Date: 11/29/2017
+* Date Created: 11/1/2017
+* Date Last Modified: 11/11/2017
+*/
+
 #include "pacman.h"
 #include "tile.h"
 #include <iostream>
@@ -41,6 +52,17 @@ int Pacman::getScore()
     return score;
 }
 
+int Pacman::getR(){
+    return r;
+}
+int Pacman::getC(){
+    return c;
+}
+Point Pacman::getCenter()
+{
+    return center;
+}
+
 void Pacman::setLives(int l)
 {
     lives = l;
@@ -69,14 +91,25 @@ void Pacman::setCenter(Point c)
 {
     center = c;
 }
-void Pacman::eat(Tile map[36][28]){
+void Pacman::setR(int row)
+{
+    r = row;
+}
+void Pacman::setC(int col)
+{
+    c = col;
+}
+bool Pacman::eat(Tile map[36][28]){
     if(map[r][c].getPel().active){
         map[r][c].setPel();
 
         score+=500;
 
         cout << score;
+
+        return true;
     }
+    return false;
 
 }
 
@@ -85,78 +118,62 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
     switch(getDirection())
     {
         case RIGHT: if(map[r][c + 1].isPath()){
-                        c++;
-                        for(int i = 0; i < 25; i++){
+                        setCenter(Point(center.x + 1, r * 25 + 12));
 
-                            erasePac(g);
-                            setCenter(Point(center.x+1, center.y));
-                            drawPac(g);
-                            g.Sleep(25);
-                            g.update();
+                        if(center.x == (c + 1) * 25 + 12)
+                        {
+                            c++;
                         }
+
                     }
                     else if(r==17&&c==27){
-                        for(int i = 0; i < 25; i++){
-
-                            erasePac(g);
-                            setCenter(Point(center.x+1, center.y));
-                            drawPac(g);
-                            g.Sleep(25);
-                            g.update();
+                        setCenter(Point(center.x + 1, center.y));
+                        if(center.x >= (c + 1) * 25 + 12)
+                        {
+                            setCenter(Point(12, center.y-1));
+                            c=0;
+                            map[r][c].drawTile(g);
+                            map[r + 1][c].drawTile(g);
                         }
-                        setCenter(Point(center.x, center.y-1));
-                        c=0;
                     }
                     break;
         case LEFT:  if(map[r][c - 1].isPath()){
-                        c--;
-                        for(int i = 0; i < 25; i++){
-
-                            erasePac(g);
-                            setCenter(Point(center.x-1, center.y));
-                            drawPac(g);
-                            g.Sleep(25);
-                            g.update();
+                        setCenter(Point(center.x - 1, r * 25 + 12));
+                        if(center.x == (c - 1) * 25 + 12)
+                        {
+                            c--;
                         }
                     }
                     else if(r==17&&c==0){
-                        for(int i = 0; i < 25; i++){
-
-                            erasePac(g);
-                            setCenter(Point(center.x-1, center.y));
-                            drawPac(g);
-                            g.Sleep(25);
-                            g.update();
+                        setCenter(Point(center.x - 1, center.y));
+                        if(center.x <= (c - 1) * 25 + 12)
+                        {
+                            setCenter(Point(27 * 25 + 12, center.y-1));
+                            c=27;
+                            map[r][c].drawTile(g);
+                            map[r - 1][c].drawTile(g);
                         }
-                        setCenter(Point(center.x, center.y+1));
-                        c=27;
                     }
                     break;
         case UP:    if(map[r - 1][c].isPath()){
-                        r--;
-                        for(int i = 0; i < 25; i++){
+                       setCenter(Point(c * 25 + 12, center.y-1));
+                       if(center.y == (r - 1) * 25 + 12)
+                       {
+                            r--;
+                       }
 
-                            erasePac(g);
-                            setCenter(Point(center.x, center.y-1));
-                            drawPac(g);
-                            g.Sleep(25);
-                            g.update();
-                        }
                     }
                     break;
         case DOWN:  if(map[r + 1][c].isPath()){
-                        r++;
-                        for(int i = 0; i < 25; i++){
-
-                            erasePac(g);
-                            setCenter(Point(center.x, center.y+1));
-                            drawPac(g);
-                            g.Sleep(25);
-                            g.update();
+                        setCenter(Point(c * 25 + 12, center.y+1));
+                        if(center.y == (r + 1) * 25 + 12)
+                        {
+                            r++;
                         }
                     }
                     break;
     }
+
 }
 void Pacman::erasePac(SDL_Plotter& g)
 {
@@ -180,6 +197,91 @@ void Pacman::drawPac(SDL_Plotter& g)
             if(sqrt(x * x + y * y) <= radius)
             {
                 g.plotPixel(center.x + x, center.y + y, 255, 238, 0);
+            }
+        }
+    }
+
+    if(direction == UP && waka != CLOSED_WAKA)
+    {
+        if(waka == HALF2 || waka == HALF_WAKA)
+        {
+            for(double x = center.x - 3; x <= center.x + 3; x++)
+            {
+                Line l = Line(center, Point(x, center.y - radius));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+        else
+        {
+            for(double x = center.x - 10; x <= center.x + 10; x++)
+            {
+                Line l = Line(center, Point(x, center.y - radius));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+    }
+    else if(direction == RIGHT && waka != CLOSED_WAKA)
+    {
+        if(waka == HALF2 || waka == HALF_WAKA)
+        {
+            for(int y = center.y - 3; y <= center.y + 3; y++)
+            {
+                Line l = Line(center, Point(center.x + radius, y));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+        else
+        {
+            for(int y = center.y - 10; y <= center.y + 10; y++)
+            {
+                Line l = Line(center, Point(center.x + radius, y));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+    }
+    else if(direction == LEFT && waka != CLOSED_WAKA)
+    {
+        if(waka == HALF2 || waka == HALF_WAKA)
+        {
+            for(int y = center.y - 3; y <= center.y + 3; y++)
+            {
+                Line l = Line(center, Point(center.x - radius, y));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+        else
+        {
+            for(int y = center.y - 10; y <= center.y + 10; y++)
+            {
+                Line l = Line(center, Point(center.x - radius, y));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+    }
+    else if(direction == DOWN && waka != CLOSED_WAKA)
+    {
+        if(waka == HALF2 || waka == HALF_WAKA)
+        {
+            for(int x = center.x - 3; x <= center.x + 3; x++)
+            {
+                Line l = Line(center, Point(x, center.y + radius));
+
+                l.drawLine(g, Color(0, 0, 0));
+            }
+        }
+        else
+        {
+            for(int x = center.x - 10; x <= center.x + 10; x++)
+            {
+                Line l = Line(center, Point(x, center.y + radius));
+
+                l.drawLine(g, Color(0, 0, 0));
             }
         }
     }

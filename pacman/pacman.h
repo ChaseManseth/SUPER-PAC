@@ -1,14 +1,27 @@
+/*
+* Author: Zachary Steudel, Chase Manseth, Meghan Bibb,
+* Will Rhoden, Bailey Stone
+* Assignment Title:  Pacman Group Project
+* Assignment Description: User can play a faithfully recreated
+* version of pacman.
+* Due Date: 11/29/2017
+* Date Created: 11/1/2017
+* Date Last Modified: 11/11/2017
+*/
+
 #ifndef PACMAN_H_INCLUDED
 #define PACMAN_H_INCLUDED
 
 #include "point.h"
+#include "color.h"
+#include "line.h"
 #include "SDL_Plotter.h"
 #include "tile.h"
 #include <cmath>
 
 
 const int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
-const int CLOSED_WAKA = 5, HALF_WAKA = 6, FULL_WAKA = 7;
+const int CLOSED_WAKA = 5, HALF_WAKA = 6, FULL_WAKA = 7, HALF2 = 8;
 
 class Pacman
 {
@@ -32,7 +45,12 @@ class Pacman
         int getSpeed();
         int getDirection();
         int getScore();
+        Point getCenter();
+        int getR();
+        int getC();
 
+        void setR(int row);
+        void setC(int col);
         void setLives(int l);
         void setState(int st);
         void setCenter(Point c);
@@ -41,7 +59,7 @@ class Pacman
         void setDirection(int d);
         void setScore(int p);
 
-        void eat(Tile map[36][28]);
+        bool eat(Tile map[36][28]);
         void movePosition(int d, Tile map[36][28], SDL_Plotter& g);
         void erasePac(SDL_Plotter& g);
         void drawPac(SDL_Plotter& g);
