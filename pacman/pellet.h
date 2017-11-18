@@ -42,11 +42,11 @@ struct Pellet
         }
         else if(active && isEnergizer)
         {
-            for(int x = -12; x <= 12; x++)
+            for(int x = -8; x <= 8; x++)
             {
-                for(int y = -12; y <= 12; y++)
+                for(int y = -8; y <= 8; y++)
                 {
-                    if(sqrt(x * x + y * y) <= 12)
+                    if(sqrt(x * x + y * y) <= 8)
                     {
                         g.plotPixel(p.x + x, p.y + y, 255, 255, 255);
                     }

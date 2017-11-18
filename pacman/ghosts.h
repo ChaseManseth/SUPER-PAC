@@ -46,6 +46,7 @@ class Ghost{
         void setCenter(Point p);
         void setDir(int d);
         void setActive(bool b);
+        void setColor(Color c);
         void setR(int row);
         void setC(int col);
 
@@ -61,6 +62,7 @@ class Ghost{
         bool moveDown(Tile map[36][28], SDL_Plotter& g, double& dDist);
         bool moveRight(Tile map[36][28], SDL_Plotter& g, double& rDist);
         void move(Tile map[36][28], SDL_Plotter& g);
+        void moveFrightened(Tile map[36][28], SDL_Plotter& g, Pacman pac);
 
 };
 

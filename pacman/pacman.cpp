@@ -16,6 +16,7 @@
 
 Pacman::Pacman(int row, int col)
 {
+    state = NORMAL;
     r = row;
     c = col;
     lives = 3;
@@ -99,13 +100,27 @@ void Pacman::setC(int col)
 {
     c = col;
 }
-bool Pacman::eat(Tile map[36][28]){
-    if(map[r][c].getPel().active){
+bool Pacman::eat(Tile map[36][28])
+{
+    if(map[r][c].getPel().active && !map[r][c].getPel().isEnergizer)
+    {
         map[r][c].setPel();
 
         score += 10;
 
-        cout << score;
+        cout << " " << score;
+
+        return true;
+    }
+    else if(map[r][c].getPel().active && map[r][c].getPel().isEnergizer)
+    {
+        map[r][c].setPel();
+
+        score += 50;
+
+        cout << " " << score;
+
+        state = SUPERPAC;
 
         return true;
     }
@@ -128,12 +143,10 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
                     }
                     else if(r==17&&c==27){
                         setCenter(Point(center.x + 1, center.y));
-                        if(center.x >= (c + 1) * 25 + 12)
+                        if(center.x >= c * 25 + 12)
                         {
-                            setCenter(Point(12, center.y-1));
+                            setCenter(Point(12, center.y));
                             c=0;
-                            map[r][c].drawTile(g);
-                            map[r + 1][c].drawTile(g);
                         }
                     }
                     break;
@@ -146,12 +159,10 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
                     }
                     else if(r==17&&c==0){
                         setCenter(Point(center.x - 1, center.y));
-                        if(center.x <= (c - 1) * 25 + 12)
+                        if(center.x <= c * 25 + 12)
                         {
-                            setCenter(Point(27 * 25 + 12, center.y-1));
+                            setCenter(Point(27 * 25 + 12, center.y));
                             c=27;
-                            map[r][c].drawTile(g);
-                            map[r - 1][c].drawTile(g);
                         }
                     }
                     break;

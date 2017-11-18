@@ -26,8 +26,11 @@ int main(int argc, char** argv)
     Mix_Chunk *gEat = NULL;
     Mix_Music *gAmbient = NULL;
     Mix_Chunk *gDeath = NULL;
+    Mix_Chunk *gGhostDead = NULL;
     bool releaseCalled = false;
+    bool rando = false;
     int numEaten = 0;
+    int counter = 0;
     ifstream inData;
     bool readValue;
     SDL_Plotter g(900,700);
@@ -39,6 +42,7 @@ int main(int argc, char** argv)
     //initialize sound files
     gEat = Mix_LoadWAV("wakka_wakka1.wav");
     gDeath = Mix_LoadWAV("life_lost.wav");
+    gGhostDead = Mix_LoadWAV("ghost_eaten.wav");
     gAmbient = Mix_LoadMUS("ghosts_ambient.wav");
 
     Tile map[36][28];
@@ -125,53 +129,144 @@ int main(int argc, char** argv)
             clyde.erase(g, map);
             map[clyde.getR()][clyde.getC()].drawTile(g);
 
-            //handle ghost movement & collision
-            //+ pacman death, death sounds
-            pinky.target(pac);
-            pinky.move(map, g);
-            pinky.draw(g, map);
-            if(pinky.isCollide(map, pac, g))
+            if(pac.getState() == NORMAL)
             {
-                Mix_PauseMusic();
-                Mix_PlayChannel( -1, gDeath, 0 );
-                g.Sleep(1500);
-                Mix_ResumeMusic();
-                rePositionGhosts(g, Blinky, pinky, inky, clyde, map);
+                //handle ghost movement & collision
+                //+ pacman death, death sounds
+                pinky.target(pac);
+                pinky.move(map, g);
+                pinky.draw(g, map);
+                if(pinky.isCollide(map, pac, g))
+                {
+                    Mix_PauseMusic();
+                    Mix_PlayChannel( -1, gDeath, 0 );
+                    g.Sleep(1500);
+                    Mix_ResumeMusic();
+                    rePositionGhosts(g, Blinky, pinky, inky, clyde, map);
+                    pac.setR(26);
+                    pac.setC(13);
+
+                    pac.setCenter(map[26][13].getCenter());
+                }
+                Blinky.target(pac);
+                Blinky.move(map, g);
+                Blinky.draw(g, map);
+                if(Blinky.isCollide(map, pac, g))
+                {
+                    Mix_PauseMusic();
+                    Mix_PlayChannel( -1, gDeath, 0 );
+                    g.Sleep(1500);
+                    Mix_ResumeMusic();
+                    rePositionGhosts(g, Blinky, pinky, inky, clyde, map);
+                    pac.setR(26);
+                    pac.setC(13);
+
+                    pac.setCenter(map[26][13].getCenter());
+                }
+                inky.target(pac);
+                inky.move(map, g);
+                inky.draw(g, map);
+                if(inky.isCollide(map, pac, g))
+                {
+                    Mix_PauseMusic();
+                    Mix_PlayChannel( -1, gDeath, 0 );
+                    g.Sleep(1500);
+                    Mix_ResumeMusic();
+                    rePositionGhosts(g, Blinky, pinky, inky, clyde, map);
+                    pac.setR(26);
+                    pac.setC(13);
+
+                    pac.setCenter(map[26][13].getCenter());
+                }
+                clyde.target(pac);
+                clyde.move(map, g);
+                clyde.draw(g, map);
+                if(clyde.isCollide(map, pac, g))
+                {
+                    Mix_PauseMusic();
+                    Mix_PlayChannel( -1, gDeath, 0 );
+                    g.Sleep(1500);
+                    Mix_ResumeMusic();
+                    rePositionGhosts(g, Blinky, pinky, inky, clyde, map);
+                    pac.setR(26);
+                    pac.setC(13);
+
+                    pac.setCenter(map[26][13].getCenter());
+                }
+            }
+            else if(pac.getState() == SUPERPAC)
+            {
+                if(i == 59)
+                {
+                    counter++;
+                }
+
+                //set ghosts dark blue
+                Blinky.setColor(Color(0, 0, 205));
+                inky.setColor(Color(0, 0, 205));
+                pinky.setColor(Color(0, 0, 205));
+                clyde.setColor(Color(0, 0, 205));
+
+                Blinky.target(pac);
+                inky.target(pac);
+                pinky.target(pac);
+                clyde.target(pac);
+
+                Blinky.moveFrightened(map, g, pac);
+                inky.moveFrightened(map, g, pac);
+                pinky.moveFrightened(map, g, pac);
+                clyde.moveFrightened(map, g, pac);
+                //check for ghost dying, play death noise
+                //increment score
+                if(Blinky.isCollide(map, pac, g))
+                {
+                    Mix_PlayChannel( -1, gGhostDead, 0 );
+                    g.Sleep(250);
+                    releaseGhost(Blinky, map, rando);
+                    pac.setScore(pac.getScore() + 200);
+                }
+                if(inky.isCollide(map, pac, g))
+                {
+                    Mix_PlayChannel( -1, gGhostDead, 0 );
+                    g.Sleep(250);
+                    releaseGhost(inky, map, rando);
+                    pac.setScore(pac.getScore() + 200);
+                }
+                if(pinky.isCollide(map, pac, g))
+                {
+                    Mix_PlayChannel( -1, gGhostDead, 0 );
+                    g.Sleep(250);
+                    releaseGhost(pinky, map, rando);
+                    pac.setScore(pac.getScore() + 200);
+                }
+                if(clyde.isCollide(map, pac, g))
+                {
+                    Mix_PlayChannel( -1, gGhostDead, 0 );
+                    g.Sleep(250);
+                    releaseGhost(clyde, map, rando);
+                    pac.setScore(pac.getScore() + 200);
+                }
+
+                Blinky.draw(g, map);
+                inky.draw(g, map);
+                pinky.draw(g, map);
+                clyde.draw(g, map);
+
+                //after some seconds, set pacman back to vulnerable
+                if(counter == 12)
+                {
+                    pac.setState(NORMAL);
+
+                    Blinky.setColor(blink);
+                    inky.setColor(ink);
+                    pinky.setColor(pink);
+                    clyde.setColor(cly);
+
+                    counter = 0;
+                }
 
             }
-            Blinky.target(pac);
-            Blinky.move(map, g);
-            Blinky.draw(g, map);
-            if(Blinky.isCollide(map, pac, g))
-            {
-                Mix_PauseMusic();
-                Mix_PlayChannel( -1, gDeath, 0 );
-                g.Sleep(1500);
-                Mix_ResumeMusic();
-                rePositionGhosts(g, Blinky, pinky, inky, clyde, map);
-            }
-            inky.target(pac);
-            inky.move(map, g);
-            inky.draw(g, map);
-            if(inky.isCollide(map, pac, g))
-            {
-                Mix_PauseMusic();
-                Mix_PlayChannel( -1, gDeath, 0 );
-                g.Sleep(1500);
-                Mix_ResumeMusic();
-                rePositionGhosts(g, Blinky, pinky, inky, clyde, map);
-            }
-            clyde.target(pac);
-            clyde.move(map, g);
-            clyde.draw(g, map);
-            if(clyde.isCollide(map, pac, g))
-            {
-                Mix_PauseMusic();
-                Mix_PlayChannel( -1, gDeath, 0 );
-                g.Sleep(1500);
-                Mix_ResumeMusic();
-                rePositionGhosts(g, Blinky, pinky, inky, clyde, map);
-            }
+
 
             if(pac.eat(map))
             {
@@ -181,7 +276,7 @@ int main(int argc, char** argv)
             }
 
             //releasing ghosts based on pellet eating
-            if(numEaten % 24 == 0 && !releaseCalled)
+            if(numEaten % 20 == 0 && !releaseCalled)
             {
                 if(!Blinky.getActive())
                 {
@@ -222,28 +317,24 @@ int main(int argc, char** argv)
                                             pac.setDirection(RIGHT);
                                       }
                                       pac.movePosition(pac.getDirection(), map, g);
-                                      Blinky.target(pac);
                                       break;
                     case LEFT_ARROW:  if(map[pac.getR()][pac.getC() - 1].isPath() && abs(pac.getCenter().y - (pac.getR() * 25 + 12)) <= 4)
                                       {
                                             pac.setDirection(LEFT);
                                       }
                                       pac.movePosition(pac.getDirection(), map, g);
-                                      Blinky.target(pac);
                                       break;
                     case UP_ARROW:    if(map[pac.getR() - 1][pac.getC()].isPath() && abs(pac.getCenter().x - (pac.getC() * 25 + 12)) <= 4)
                                       {
                                             pac.setDirection(UP);
                                       }
                                       pac.movePosition(pac.getDirection(), map, g);
-                                      Blinky.target(pac);
                                       break;
                     case DOWN_ARROW:  if(map[pac.getR() + 1][pac.getC()].isPath() && abs(pac.getCenter().x - (pac.getC() * 25 + 12)) <= 4)
                                       {
                                             pac.setDirection(DOWN);
                                       }
                                       pac.movePosition(pac.getDirection(), map, g);
-                                      Blinky.target(pac);
                                       break;
                 }
 
@@ -252,7 +343,11 @@ int main(int argc, char** argv)
             {
                 pac.erasePac(g);
                 pac.movePosition(pac.getDirection(), map, g);
-                Blinky.target(pac);
+            }
+            //dictates pacman speed, adds extra moving
+            if(i % 5 == 0)
+            {
+                pac.movePosition(pac.getDirection(), map, g);
             }
             g.Sleep(15);
         }

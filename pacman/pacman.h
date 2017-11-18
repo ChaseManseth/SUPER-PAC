@@ -19,7 +19,7 @@
 #include "tile.h"
 #include <cmath>
 
-
+const int NORMAL = 0, SUPERPAC = -1;
 const int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
 const int CLOSED_WAKA = 5, HALF_WAKA = 6, FULL_WAKA = 7, HALF2 = 8;
 

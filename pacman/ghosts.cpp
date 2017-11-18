@@ -61,6 +61,10 @@ void Ghost::setActive(bool b)
 {
     active = b;
 }
+void Ghost::setColor(Color c)
+{
+    color = c;
+}
 void Ghost::setC(int col)
 {
     c = col;
@@ -70,11 +74,6 @@ bool Ghost::isCollide(Tile map[36][28], Pacman& p, SDL_Plotter& g)
 {
     if(r == p.getR() && c == p.getC())
     {
-        p.setR(26);
-        p.setC(13);
-
-        p.setCenter(map[26][13].getCenter());
-
         return true;
     }
 
@@ -83,11 +82,6 @@ bool Ghost::isCollide(Tile map[36][28], Pacman& p, SDL_Plotter& g)
        (getCenter().y - 11 <= p.getCenter().y + 11 && getCenter().y + 11 >= p.getCenter().y - 11 && c == p.getC()) || //up
        (getCenter().y + 11 >= p.getCenter().y - 11 && getCenter().y - 11 <= p.getCenter().y + 11 && c == p.getC()))   //down
     {
-        p.setR(26);
-        p.setC(13);
-
-        p.setCenter(map[26][13].getCenter());
-
         return true;
     }
 
@@ -108,7 +102,7 @@ bool Ghost::moveUp(Tile map[36][28], SDL_Plotter& g, double& uDist){
 
 bool Ghost::moveLeft(Tile map[36][28], SDL_Plotter& g, double& lDist){
     bool flag = false;
-    if(map[r][c-1].isPath()&&dir != RIGHT){
+    if(map[r][c-1].isPath()&&dir != RIGHT && (r != 17 || c - 1 != 5)){
         lDist = sqrt(pow(targetC - (c-1),2) + pow(targetR - r,2));
         flag = true;
     }
@@ -126,7 +120,7 @@ bool Ghost::moveDown(Tile map[36][28], SDL_Plotter& g, double& dDist){
 
 bool Ghost::moveRight(Tile map[36][28], SDL_Plotter& g, double& rDist){
     bool flag = false;
-    if(map[r][c+1].isPath()&&dir != LEFT){
+    if(map[r][c+1].isPath()&&dir != LEFT && (r != 17 || c + 1 != 22)){
         rDist = sqrt(pow(targetC - (c+1),2) + pow(targetR - r,2));
         flag = true;
     }
@@ -211,6 +205,120 @@ void Ghost::move(Tile map[36][28], SDL_Plotter& g){
         }
     }
     else if(ri < l){
+        dir = RIGHT;
+    }
+    else{
+        dir = LEFT;
+    }
+    if(dir == LEFT && active){
+        setCenter(Point(center.x - 1, r * 25 + 12));
+        if(center.x == (c - 1) * 25 + 12)
+        {
+            c--;
+        }
+    }
+    if(dir == RIGHT && active){
+        setCenter(Point(center.x + 1, r * 25 + 12));
+        if(center.x == (c + 1) * 25 + 12)
+        {
+            c++;
+        }
+    }
+    if(dir == DOWN && active){
+        setCenter(Point(c * 25 + 12, center.y+1));
+        if(center.y == (r + 1) * 25 + 12)
+        {
+            r++;
+        }
+    }
+    if(dir == UP && active){
+        setCenter(Point(c * 25 + 12, center.y-1));
+        if(center.y == (r - 1) * 25 + 12)
+        {
+            r--;
+        }
+    }
+}
+
+void Ghost::moveFrightened(Tile map[36][28], SDL_Plotter& g, Pacman pac)
+{
+    double u, l, d, ri;
+    u = l = d = ri = -1000000;
+    bool flag = false;
+    queue<int> BlinkyDir;
+    BlinkyDir.push(UP);
+    BlinkyDir.push(LEFT);
+    BlinkyDir.push(DOWN);
+    BlinkyDir.push(RIGHT);
+    while(!flag){
+        if(BlinkyDir.front() == UP){
+            if(moveUp(map,g, u)){
+                flag = true;
+                BlinkyDir.pop();
+            }
+            else{
+                BlinkyDir.pop();
+                BlinkyDir.push(UP);
+            }
+        }
+        if(BlinkyDir.front() == LEFT){
+            if(moveLeft(map,g, l)){
+                flag = true;
+                BlinkyDir.pop();
+            }
+            else{
+                BlinkyDir.pop();
+                BlinkyDir.push(LEFT);
+            }
+        }
+        if(BlinkyDir.front() == DOWN){
+            if(moveDown(map,g, d)){
+                flag = true;
+                BlinkyDir.pop();
+            }
+            else{
+                BlinkyDir.pop();
+                BlinkyDir.push(DOWN);
+            }
+        }
+        if(BlinkyDir.front() == RIGHT){
+            if(moveRight(map,g, ri)){
+                flag = true;
+                BlinkyDir.pop();
+            }
+            else{
+                BlinkyDir.pop();
+                BlinkyDir.push(RIGHT);
+            }
+        }
+    }
+    if(u > d){
+        if(u > ri){
+            if(u > l){
+                dir = UP;
+            }
+            else{
+                dir = LEFT;
+            }
+        }
+        else{
+            if(ri > l){
+                dir = RIGHT;
+            }
+            else{
+                dir = LEFT;
+            }
+        }
+    }
+    else if(d > ri){
+        if(d > l){
+            dir = DOWN;
+        }
+        else{
+            dir = LEFT;
+        }
+    }
+    else if(ri > l){
         dir = RIGHT;
     }
     else{
