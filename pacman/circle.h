@@ -1,20 +1,8 @@
-/*
-* Author: Zachary Steudel, Chase Manseth, Meghan Bibb,
-* Will Rhoden, Bailey Stone
-* Assignment Title:  Pacman Group Project
-* Assignment Description: User can play a faithfully recreated
-* version of pacman.
-* Due Date: 11/29/2017
-* Date Created: 11/1/2017
-* Date Last Modified: 11/11/2017
-*/
-
 #ifndef CIRCLE_H_INCLUDED
 #define CIRCLE_H_INCLUDED
 
 #include "point.h"
 #include "color.h"
-#include "line.h"
 #include "SDL_Plotter.h"
 #include <cmath>
 
@@ -27,15 +15,70 @@ class Circle {
         Color color;
 
     public:
+        /*
+         * Description: Constructor, sets center, radius, and color
+         *  to c, r, and col, respectively.
+         * Return: N/A
+         * Precondition: none
+         * Postcondition: center, radius, and color are equal to
+         *  c, r, and col, respectively.
+         */
         Circle(Point c, int r, Color col);
-        void setCenter(const Point);
-        void setRadius(const int);
-        void setColor(const Color);
 
+        /*
+         * Description: sets center to p
+         * Return: void
+         * Precondition: p is initialized.
+         * Postcondition: center = p, p is unchanged
+         */
+        void setCenter(const Point p);
+
+        /*
+         * Description: sets radius to r
+         * Return: void
+         * Precondition: r is initialized
+         * Postcondition: radius = r, r is unchanged
+         */
+        void setRadius(const int r);
+
+        /*
+         * Description: sets color to col
+         * Return: void
+         * Precondition: col is initialized
+         * Postcondition:
+         */
+        void setColor(const Color col);
+
+        /*
+         * Description: returns center
+         * Return: Point
+         * Precondition: center is initialized
+         * Postcondition: center is returned.
+         */
         Point getCenter() const;
+
+        /*
+         * Description: returns radius
+         * Return: int
+         * Precondition: radius is initialized
+         * Postcondition: radius is returned
+         */
         int getRadius() const;
+
+        /*
+         * Description: returns color
+         * Return: Color
+         * Precondition: color is initialized
+         * Postcondition: color is returned
+         */
         Color getColor() const;
 
+        /*
+         * Description: draws to the SDL_Plotter
+         * Return: void
+         * Precondition: SDL_Plotter g is initialized
+         * Postcondition: circle is drawn to the plotter
+         */
         void draw(SDL_Plotter& g)const;
 };
 

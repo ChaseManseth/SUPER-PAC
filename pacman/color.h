@@ -1,24 +1,27 @@
-/*
-* Author: Zachary Steudel, Chase Manseth, Meghan Bibb,
-* Will Rhoden, Bailey Stone
-* Assignment Title:  Pacman Group Project
-* Assignment Description: User can play a faithfully recreated
-* version of pacman.
-* Due Date: 11/29/2017
-* Date Created: 11/1/2017
-* Date Last Modified: 11/11/2017
-*/
-
 #ifndef COLOR_H_INCLUDED
 #define COLOR_H_INCLUDED
 
 struct Color {
     int R, G, B;
-
+    /*
+     * Description: Constructor, sets values of R, G, and B
+     *  to zero.
+     * Return: none.
+     * Precondition: N/A
+     * Postcondition: R, G, and B are all equal to zero.
+     */
     Color() {
         R = G = B = 0;
     }
 
+    /*
+     * Description: Constructor, sets values of R, G, and B
+     *  to zero.
+     * Return: none.
+     * Precondition: N/A
+     * Postcondition: R, G, and B are equal to r, g, and b
+     *  respectively.
+     */
     Color(int r, int g, int b) {
         R = r;
         G = g;
