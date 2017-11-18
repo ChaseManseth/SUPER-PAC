@@ -1,0 +1,21 @@
+ifstream num;
+    ifstream fonts;
+    num.open("nums.txt");
+    fonts.open("font.txt");
+    int nums[10][25][25];
+    int lets[26][25][25];
+
+    for(int i = 0; i < 10; i++){
+        for(int k = 0;k < 25; k++){
+            for(int j = 0; j < 25; j++){
+                num >> nums[i][k][j];
+            }
+        }
+    }
+    for(int i = 0; i < 26; i++){
+        for(int k = 0;k < 25; k++){
+            for(int j = 0; j < 25; j++){
+                fonts >> lets[i][k][j];
+            }
+        }
+    }
