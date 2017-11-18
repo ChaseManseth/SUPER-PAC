@@ -19,15 +19,19 @@ Ghost::Ghost(Color Col, Tile map[36][28]){
 
     color = Col;
     dir = LEFT;
-    r = 14;
-    c = 9;
+    r = 16;
+    c = 13;
     center = map[r][c].getCenter();
     radius = 12;
-
+    active = false;
 
 }
 int Ghost::getDir(){
     return dir;
+}
+bool Ghost::getActive()
+{
+    return active;
 }
 Point Ghost::getCenter()
 {
@@ -52,6 +56,10 @@ void Ghost::setDir(int d)
 void Ghost::setR(int row)
 {
     r = row;
+}
+void Ghost::setActive(bool b)
+{
+    active = b;
 }
 void Ghost::setC(int col)
 {
@@ -208,28 +216,28 @@ void Ghost::move(Tile map[36][28], SDL_Plotter& g){
     else{
         dir = LEFT;
     }
-    if(dir == LEFT){
+    if(dir == LEFT && active){
         setCenter(Point(center.x - 1, r * 25 + 12));
         if(center.x == (c - 1) * 25 + 12)
         {
             c--;
         }
     }
-    if(dir == RIGHT){
+    if(dir == RIGHT && active){
         setCenter(Point(center.x + 1, r * 25 + 12));
         if(center.x == (c + 1) * 25 + 12)
         {
             c++;
         }
     }
-    if(dir == DOWN){
+    if(dir == DOWN && active){
         setCenter(Point(c * 25 + 12, center.y+1));
         if(center.y == (r + 1) * 25 + 12)
         {
             r++;
         }
     }
-    if(dir == UP){
+    if(dir == UP && active){
         setCenter(Point(c * 25 + 12, center.y-1));
         if(center.y == (r - 1) * 25 + 12)
         {

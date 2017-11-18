@@ -103,7 +103,7 @@ bool Pacman::eat(Tile map[36][28]){
     if(map[r][c].getPel().active){
         map[r][c].setPel();
 
-        score+=500;
+        score += 10;
 
         cout << score;
 

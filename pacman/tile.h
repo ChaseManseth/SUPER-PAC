@@ -40,6 +40,7 @@ class Tile
 
         void setRow(int row);
         void setPel();
+        void setEnergy();
         void setCol(int col);
         void setPath(bool isP);
 

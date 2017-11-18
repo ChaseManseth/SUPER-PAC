@@ -56,6 +56,10 @@ Pellet Tile::getPel(){
 void Tile::setPel() {
     pel.setActive(false);
 }
+void Tile::setEnergy()
+{
+    pel.isEnergizer = true;
+}
 
 void Tile::setRow(int row)
 {

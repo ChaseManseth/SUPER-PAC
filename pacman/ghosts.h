@@ -39,11 +39,13 @@ class Ghost{
         Ghost(Color Col, Tile map[36][28]);
 
         int getDir();
+        bool getActive();
         Point getCenter();
         int getR();
         int getC();
         void setCenter(Point p);
         void setDir(int d);
+        void setActive(bool b);
         void setR(int row);
         void setC(int col);
 
