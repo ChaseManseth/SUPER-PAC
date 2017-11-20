@@ -1,31 +1,27 @@
+/*
+* Author: Zachary Steudel, Chase Manseth, Meghan Bibb,
+* Will Rhoden, Bailey Stone
+* Assignment Title:  Pacman Group Project
+* Assignment Description: User can play a faithfully recreated
+* version of pacman.
+* Due Date: 11/29/2017
+* Date Created: 11/1/2017
+* Date Last Modified: 11/11/2017
+*/
+
 #ifndef POINT_H_INCLUDED
 #define POINT_H_INCLUDED
 
 struct Point
 {
-    int x, y;
+    double x, y;
 
-
-    /*
-     * Description: Constructor, sets default Point values of
-     *  x = y = 0.
-     * Return: none.
-     * Precondition: N/A
-     * Postcondition: x and y both equal zero.
-     */
     Point()
     {
         x = y = 0;
     }
-    /*
-     * Description: Constructor, sets values of x and y to
-     *  values of a and b, respectively.
-     * Return: none.
-     * Precondition: N/A
-     * Postcondition: x and y are both equal to a and b
-     *  respectively.
-     */
-    Point(int a, int b)
+
+    Point(double a, double b)
     {
         x = a;
         y = b;

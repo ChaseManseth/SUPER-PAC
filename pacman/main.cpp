@@ -27,6 +27,7 @@ int main(int argc, char** argv)
     Mix_Music *gAmbient = NULL;
     Mix_Chunk *gDeath = NULL;
     Mix_Chunk *gGhostDead = NULL;
+    Mix_Chunk *gPowerPellet = NULL;
     bool releaseCalled = false;
     bool rando = false;
     int numEaten = 0;
@@ -44,6 +45,7 @@ int main(int argc, char** argv)
     gDeath = Mix_LoadWAV("life_lost.wav");
     gGhostDead = Mix_LoadWAV("ghost_eaten.wav");
     gAmbient = Mix_LoadMUS("ghosts_ambient.wav");
+    gPowerPellet = Mix_LoadWAV("power_pellet_eaten.wav");
 
     Tile map[36][28];
 
@@ -268,8 +270,15 @@ int main(int argc, char** argv)
             }
 
 
-            if(pac.eat(map))
+            if(pac.eat(map, counter))
             {
+                //eat function sets counter to 0 to show
+                //that big pellet was eaten to play sound
+                if(counter == -1)
+                {
+                    Mix_PlayChannel( -1, gPowerPellet, 0 );
+                    counter = 0;
+                }
                 releaseCalled = false;
                 numEaten++;
                 Mix_PlayChannel( -1, gEat, 0 );

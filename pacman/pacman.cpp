@@ -100,7 +100,7 @@ void Pacman::setC(int col)
 {
     c = col;
 }
-bool Pacman::eat(Tile map[36][28])
+bool Pacman::eat(Tile map[36][28], int& count)
 {
     if(map[r][c].getPel().active && !map[r][c].getPel().isEnergizer)
     {
@@ -114,6 +114,7 @@ bool Pacman::eat(Tile map[36][28])
     }
     else if(map[r][c].getPel().active && map[r][c].getPel().isEnergizer)
     {
+        count = -1;
         map[r][c].setPel();
 
         score += 50;
@@ -216,20 +217,32 @@ void Pacman::drawPac(SDL_Plotter& g)
     {
         if(waka == HALF2 || waka == HALF_WAKA)
         {
-            for(double x = center.x - 3; x <= center.x + 3; x++)
+            for(double y = -radius; y <= 0; y++)
             {
-                Line l = Line(center, Point(x, center.y - radius));
-
-                l.drawLine(g, Color(0, 0, 0));
+                double leftLineX = (-1 / 4.0) * y;
+                double rightLineX = (1 / 4.0) * y;
+                for(double x = -3; x <= 3; x++)
+                {
+                    if(x <= leftLineX && x >= rightLineX)
+                    {
+                        g.plotPixel(center.x + x, center.y + y, 0, 0, 0);
+                    }
+                }
             }
         }
         else
         {
-            for(double x = center.x - 10; x <= center.x + 10; x++)
+            for(double y = -radius; y <= 0; y++)
             {
-                Line l = Line(center, Point(x, center.y - radius));
-
-                l.drawLine(g, Color(0, 0, 0));
+                double leftLineX = (-5 / 6.0) * y;
+                double rightLineX = (5 / 6.0) * y;
+                for(double x = -10; x <= 10; x++)
+                {
+                    if(x <= leftLineX && x >= rightLineX)
+                    {
+                        g.plotPixel(center.x + x, center.y + y, 0, 0, 0);
+                    }
+                }
             }
         }
     }
@@ -279,20 +292,32 @@ void Pacman::drawPac(SDL_Plotter& g)
     {
         if(waka == HALF2 || waka == HALF_WAKA)
         {
-            for(int x = center.x - 3; x <= center.x + 3; x++)
+            for(double y = radius; y >= 0; y--)
             {
-                Line l = Line(center, Point(x, center.y + radius));
-
-                l.drawLine(g, Color(0, 0, 0));
+                double leftLineX = (-1 / 4.0) * y;
+                double rightLineX = (1 / 4.0) * y;
+                for(double x = -3; x <= 3; x++)
+                {
+                    if(x >= leftLineX && x <= rightLineX)
+                    {
+                        g.plotPixel(center.x + x, center.y + y, 0, 0, 0);
+                    }
+                }
             }
         }
         else
         {
-            for(int x = center.x - 10; x <= center.x + 10; x++)
+            for(double y = radius; y >= 0; y--)
             {
-                Line l = Line(center, Point(x, center.y + radius));
-
-                l.drawLine(g, Color(0, 0, 0));
+                double leftLineX = (-5 / 6.0) * y;
+                double rightLineX = (5 / 6.0) * y;
+                for(double x = -10; x <= 10; x++)
+                {
+                    if(x >= leftLineX && x <= rightLineX)
+                    {
+                        g.plotPixel(center.x + x, center.y + y, 0, 0, 0);
+                    }
+                }
             }
         }
     }

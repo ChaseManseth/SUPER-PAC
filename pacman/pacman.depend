@@ -1,18 +1,18 @@
 # depslib dependency file v1.0
-1511028614 source:c:\users\zacsh\desktop\pacman\main.cpp
+1511210950 source:c:\users\zacsh\desktop\pacman\main.cpp
 	<iostream>
 	<fstream>
 	"pacman.h"
 	"tile.h"
 	"ghosts.h"
 
-1511021939 source:c:\users\zacsh\desktop\pacman\pacman.cpp
+1511210938 source:c:\users\zacsh\desktop\pacman\pacman.cpp
 	"pacman.h"
 	"tile.h"
 	<iostream>
 	<cstdlib>
 
-1511021939 c:\users\zacsh\desktop\pacman\pacman.h
+1511197615 c:\users\zacsh\desktop\pacman\pacman.h
 	"point.h"
 	"color.h"
 	"line.h"
