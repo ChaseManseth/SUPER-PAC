@@ -8,12 +8,13 @@
 * Date Created: 11/1/2017
 * Date Last Modified: 11/11/2017
 */
-
+// -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer
 #include <iostream>
 #include <fstream>
 #include "pacman.h"
 #include "tile.h"
 #include "ghosts.h"
+#include "init.h"
 
 
 using namespace std;
@@ -32,8 +33,6 @@ int main(int argc, char** argv)
     bool rando = false;
     int numEaten = 0;
     int counter = 0;
-    ifstream inData;
-    bool readValue;
     SDL_Plotter g(900,700);
 
     //initialize audio functionality
@@ -49,38 +48,13 @@ int main(int argc, char** argv)
 
     Tile map[36][28];
 
-    inData.open("mapText.txt");
+     // Graphic Arrays
+    int nums[10][25][25];
+    int lets[26][25][25];
+    int graphic[31][25][25];
+    // Init
+    init(map, g, nums, lets, graphic);
 
-    for(int r = 0; r < 36; r++)
-    {
-        for(int c = 0; c < 28; c++)
-        {
-            map[r][c] = Tile(r, c, true);
-        }
-    }
-    for(int r = 0; r < 36; r++)
-    {
-        for(int c = 0; c < 28; c++)
-        {
-            inData >> readValue;
-            map[r][c].setPath(readValue);
-
-            if(map[r][c].isPath() && ((r == 7 && c == 1) ||
-                                       (r == 7 && c == 26) ||
-                                       (r == 26 && c == 1) ||
-                                       (r == 26 && c == 26)))
-            {
-                map[r][c].setEnergy();
-            }
-        }
-    }
-    for(int r = 0; r < 36; r++)
-    {
-        for(int c = 0; c < 28; c++)
-        {
-            map[r][c].drawTile(g);
-        }
-    }
     Pacman pac(26,13);
 
     Color blink(255,20,20);

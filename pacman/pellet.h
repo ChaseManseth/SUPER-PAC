@@ -24,13 +24,13 @@ struct Pellet
     bool active, isEnergizer;
     Pellet(){
         row = col = 0;
-        active = true;
+        active = false;
     }
     Pellet(int r, int c, bool energy){
         row = r;
         col = c;
         isEnergizer = energy;
-        active = true;
+        active = false;
     }
     void draw(Point p, SDL_Plotter& g){
         if(active && !isEnergizer){

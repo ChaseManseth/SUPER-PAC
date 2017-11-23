@@ -31,13 +31,19 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="C:/SDL/include" />
 		</Compiler>
+		<Linker>
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer" />
+			<Add directory="C:/SDL/lib" />
+		</Linker>
 		<Unit filename="SDL_Plotter.h" />
 		<Unit filename="circle.cpp" />
 		<Unit filename="circle.h" />
 		<Unit filename="color.h" />
 		<Unit filename="ghosts.cpp" />
 		<Unit filename="ghosts.h" />
+		<Unit filename="init.h" />
 		<Unit filename="line.cpp" />
 		<Unit filename="line.h" />
 		<Unit filename="main.cpp" />

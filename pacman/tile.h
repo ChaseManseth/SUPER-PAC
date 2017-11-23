@@ -28,6 +28,7 @@ class Tile
         Point center;
         bool isValid;
         Pellet pel;
+        int graphicValue;
     public:
         Tile(int row, int col, bool isP);
         Tile();
@@ -37,16 +38,19 @@ class Tile
         int getPosY();
         Point getCenter();
         Pellet getPel();
+        int getGraphicVal();
 
         void setRow(int row);
         void setPel();
         void setEnergy();
         void setCol(int col);
         void setPath(bool isP);
+        void setPel(bool active);
+        void setGraphicVal(int a);
 
         bool isPath();
         void drawTile(SDL_Plotter& g);
-
+        void drawTile(SDL_Plotter& g, int graphic[31][25][25]);
 
 };
 
