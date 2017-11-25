@@ -15,7 +15,7 @@
 #include "tile.h"
 #include "ghosts.h"
 #include "init.h"
-
+#include "font.h"
 
 using namespace std;
 
@@ -24,15 +24,16 @@ void releaseGhost(Ghost& a, Tile map[36][28], bool& r);
 
 int main(int argc, char** argv)
 {
-    Mix_Chunk *gEat = NULL;
-    Mix_Music *gAmbient = NULL;
-    Mix_Chunk *gDeath = NULL;
-    Mix_Chunk *gGhostDead = NULL;
+    Mix_Chunk *gEat         = NULL;
+    Mix_Music *gAmbient     = NULL;
+    Mix_Chunk *gDeath       = NULL;
+    Mix_Chunk *gGhostDead   = NULL;
     Mix_Chunk *gPowerPellet = NULL;
     bool releaseCalled = false;
-    bool rando = false;
-    int numEaten = 0;
-    int counter = 0;
+    bool rando    = false;
+    int numEaten  = 0;
+    int counter   = 0;
+    int prevScore = 0;
     SDL_Plotter g(900,700);
 
     //initialize audio functionality
@@ -54,6 +55,13 @@ int main(int argc, char** argv)
     int graphic[31][25][25];
     // Init
     init(map, g, nums, lets, graphic);
+
+    //prints score
+    initLetter(g, 2, 1, s);
+    initLetter(g, 3, 1, c);
+    initLetter(g, 4, 1, o);
+    initLetter(g, 5, 1, r);
+    initLetter(g, 6, 1, e);
 
     Pacman pac(26,13);
 
@@ -333,9 +341,13 @@ int main(int argc, char** argv)
                 pac.movePosition(pac.getDirection(), map, g);
             }
             g.Sleep(15);
+            //NOT FUNCTIONAL YET! updates the score       ...should this be placed somewhere else???????
+            if(pac.getScore() != prevScore){
+                //eraseScore();
+                updateScore(pac.getScore(), g);
+            }
         }
-
-}
+    }
 
     return 0;
 }
@@ -382,5 +394,3 @@ void releaseGhost(Ghost& a, Tile map[36][28], bool& r)
     a.setC(16);
     a.setCenter(map[14][16].getCenter());
 }
-
-
