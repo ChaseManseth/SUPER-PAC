@@ -31,7 +31,7 @@ int main(int argc, char** argv)
     Mix_Chunk *gPowerPellet = NULL;
     bool releaseCalled = false;
     bool rando    = false;
-    int numEaten  = 0;
+    int numEaten  = 1;
     int counter   = 0;
     int prevScore = 0;
     SDL_Plotter g(900,700);
@@ -84,8 +84,6 @@ int main(int argc, char** argv)
 
     char key;
 
-    int speed = 1;
-    const int MAX_SPEED = 10;
     Mix_PlayMusic(gAmbient, -1 );
 
     Mix_VolumeMusic(24);
@@ -118,7 +116,11 @@ int main(int argc, char** argv)
                 //handle ghost movement & collision
                 //+ pacman death, death sounds
                 pinky.target(pac);
-                pinky.move(map, g);
+                //pinky is slowest
+                if(i % 2 == 0)
+                {
+                    pinky.move(map, g);
+                }
                 pinky.draw(g, map);
                 if(pinky.isCollide(map, pac, g))
                 {
@@ -133,6 +135,11 @@ int main(int argc, char** argv)
                     pac.setCenter(map[26][13].getCenter());
                 }
                 Blinky.target(pac);
+                //blinky is fastest
+                if(i % 3 == 0)
+                {
+                    Blinky.move(map, g);
+                }
                 Blinky.move(map, g);
                 Blinky.draw(g, map);
                 if(Blinky.isCollide(map, pac, g))
@@ -148,6 +155,7 @@ int main(int argc, char** argv)
                     pac.setCenter(map[26][13].getCenter());
                 }
                 inky.target(pac);
+                //inky is normal speed
                 inky.move(map, g);
                 inky.draw(g, map);
                 if(inky.isCollide(map, pac, g))
@@ -163,6 +171,10 @@ int main(int argc, char** argv)
                     pac.setCenter(map[26][13].getCenter());
                 }
                 clyde.target(pac);
+                if(i % 5 == 0)
+                {
+                    clyde.move(map, g);
+                }
                 clyde.move(map, g);
                 clyde.draw(g, map);
                 if(clyde.isCollide(map, pac, g))
@@ -336,16 +348,16 @@ int main(int argc, char** argv)
                 pac.movePosition(pac.getDirection(), map, g);
             }
             //dictates pacman speed, adds extra moving
-            if(i % 5 == 0)
+            if(i % 2 == 0)
             {
                 pac.movePosition(pac.getDirection(), map, g);
             }
             g.Sleep(15);
             //NOT FUNCTIONAL YET! updates the score       ...should this be placed somewhere else???????
-            if(pac.getScore() != prevScore){
+            //if(pac.getScore() != prevScore){
                 //eraseScore();
-                updateScore(pac.getScore(), g);
-            }
+                //updateScore(pac.getScore(), g);
+            //}
         }
     }
 

@@ -46,6 +46,13 @@ void init(Tile map[36][28], SDL_Plotter& g, int nums[10][25][25], int lets[26][2
             if(readBool) {
                 map[r][c].setPel(true);
             }
+
+            if((r == 26 && c == 1) || (r == 26 && c == 26)
+               || (r == 6 && c == 1) || (r == 6 && c == 26))
+            {
+                map[r][c].setEnergy();
+                map[r][c].setPel(true);
+            }
         }
     }
 
