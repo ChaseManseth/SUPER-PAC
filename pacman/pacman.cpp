@@ -26,7 +26,7 @@ Pacman::Pacman(int row, int col)
     direction = RIGHT;
     nextDir = -1;
     waka = CLOSED_WAKA;
-    center = Point(13 * SIZE_TILE + 12,26 * SIZE_TILE + 12);
+    center = Point(c * SIZE_TILE + 12,r * SIZE_TILE + 12);
 }
 
 int Pacman::getLives()

@@ -29,6 +29,7 @@ int main(int argc, char** argv)
     Mix_Chunk *gDeath       = NULL;
     Mix_Chunk *gGhostDead   = NULL;
     Mix_Chunk *gPowerPellet = NULL;
+    Mix_Chunk *gGame_Over = NULL;
     bool releaseCalled = false;
     bool rando    = false;
     int numEaten  = 1;
@@ -47,6 +48,7 @@ int main(int argc, char** argv)
     gGhostDead = Mix_LoadWAV("ghost_eaten.wav");
     gAmbient = Mix_LoadMUS("ghosts_ambient.wav");
     gPowerPellet = Mix_LoadWAV("power_pellet_eaten.wav");
+    gGame_Over = Mix_LoadWAV("game_over.wav");
 
     Tile map[36][28];
 
@@ -85,7 +87,6 @@ int main(int argc, char** argv)
 
     pac.drawPac(g);
 
-
     char key;
 
     Mix_PlayMusic(gAmbient, -1 );
@@ -96,6 +97,24 @@ int main(int argc, char** argv)
     {
         for(int i = 0; i < 60; i++)
         {
+            if(numEaten == 245)
+            {
+                //you win
+                int score = pac.getScore();
+                pac = Pacman(26, 13);
+                init(map, g, nums, lets, graphic);
+                pac.setScore(score);
+            }
+            map[35][0].drawTile(g);
+            map[35][1].drawTile(g);
+            map[35][2].drawTile(g);
+
+            for(int z = 0; z < pac.getLives(); z++)
+            {
+                Pacman p = Pacman(35, z);
+                p.drawPac(g);
+            }
+
             //handle pacman animation
             if(pac.getWaka() == HALF2 && i % 10 == 0)
             {
@@ -136,6 +155,8 @@ int main(int argc, char** argv)
                     pac.setR(26);
                     pac.setC(13);
 
+                    pac.setLives(pac.getLives() - 1);
+
                     pac.setCenter(map[26][13].getCenter());
                 }
                 Blinky.target(pac);
@@ -156,6 +177,8 @@ int main(int argc, char** argv)
                     pac.setR(26);
                     pac.setC(13);
 
+                    pac.setLives(pac.getLives() - 1);
+
                     pac.setCenter(map[26][13].getCenter());
                 }
                 inky.target(pac);
@@ -171,6 +194,8 @@ int main(int argc, char** argv)
                     rePositionGhosts(g, Blinky, pinky, inky, clyde, map);
                     pac.setR(26);
                     pac.setC(13);
+
+                    pac.setLives(pac.getLives() - 1);
 
                     pac.setCenter(map[26][13].getCenter());
                 }
@@ -191,7 +216,19 @@ int main(int argc, char** argv)
                     pac.setR(26);
                     pac.setC(13);
 
+                    pac.setLives(pac.getLives() - 1);
+
                     pac.setCenter(map[26][13].getCenter());
+                }
+                //if pacman dies, reset game, TODO: print game over
+                if(pac.getLives() == 0)
+                {
+                    Mix_PauseMusic();
+                    Mix_PlayChannel( -1, gGame_Over, 0 );
+                    g.Sleep(4000);
+                    pac = Pacman(26, 13);
+                    init(map, g, nums, lets, graphic);
+                    Mix_ResumeMusic();
                 }
             }
             else if(pac.getState() == SUPERPAC)
@@ -212,9 +249,20 @@ int main(int argc, char** argv)
                 pinky.target(pac);
                 clyde.target(pac);
 
+                if(i % 3 == 0)
+                {
+                    Blinky.moveFrightened(map, g, pac);
+                }
                 Blinky.moveFrightened(map, g, pac);
+                if(i % 2 == 0)
+                {
+                    pinky.moveFrightened(map, g, pac);
+                }
                 inky.moveFrightened(map, g, pac);
-                pinky.moveFrightened(map, g, pac);
+                if(i % 5 == 0)
+                {
+                    clyde.moveFrightened(map, g, pac);
+                }
                 clyde.moveFrightened(map, g, pac);
                 //check for ghost dying, play death noise
                 //increment score
@@ -297,7 +345,7 @@ int main(int argc, char** argv)
             }
 
             //releasing ghosts based on pellet eating
-            if(numEaten % 20 == 0 && !releaseCalled)
+            if(numEaten % 5 == 0 && !releaseCalled)
             {
                 if(!Blinky.getActive())
                 {

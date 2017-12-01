@@ -72,10 +72,10 @@ void Ghost::setC(int col)
 
 bool Ghost::isCollide(Tile map[36][28], Pacman& p, SDL_Plotter& g)
 {
-    if((getCenter().x + 11 >= p.getCenter().x - 11 && getCenter().x - 11 <= p.getCenter().x - 11 && r == p.getR()) || //right
-       (getCenter().x - 11 <= p.getCenter().x + 11 && getCenter().x + 11 >= p.getCenter().x + 11 && r == p.getR()) || //left
-       (getCenter().y - 11 <= p.getCenter().y + 11 && getCenter().y + 11 >= p.getCenter().y - 11 && c == p.getC()) || //up
-       (getCenter().y + 11 >= p.getCenter().y - 11 && getCenter().y - 11 <= p.getCenter().y + 11 && c == p.getC()))   //down
+    if((getCenter().x + 8 >= p.getCenter().x - 8 && getCenter().x - 8 <= p.getCenter().x - 8 && r == p.getR()) || //right
+       (getCenter().x - 8 <= p.getCenter().x + 8 && getCenter().x + 8 >= p.getCenter().x + 8 && r == p.getR()) || //left
+       (getCenter().y - 8 <= p.getCenter().y + 8 && getCenter().y + 8 >= p.getCenter().y - 8 && c == p.getC()) || //up
+       (getCenter().y + 8 >= p.getCenter().y - 8 && getCenter().y - 8 <= p.getCenter().y + 8 && c == p.getC()))   //down
     {
         return true;
     }

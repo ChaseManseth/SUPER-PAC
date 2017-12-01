@@ -101,7 +101,7 @@ void Tile::drawTile(SDL_Plotter& g)
             }
             else if(!isPath())
             {
-                g.plotPixel(col, row, 150, 150, 255);
+                g.plotPixel(col, row, 0, 0, 0);
 
             }
         }
