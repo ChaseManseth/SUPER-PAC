@@ -24,6 +24,7 @@ Pacman::Pacman(int row, int col)
     radius = 12;
     score = 0;
     direction = RIGHT;
+    nextDir = -1;
     waka = CLOSED_WAKA;
     center = Point(13 * SIZE_TILE + 12,26 * SIZE_TILE + 12);
 }
@@ -56,6 +57,10 @@ int Pacman::getScore()
 int Pacman::getR(){
     return r;
 }
+int Pacman::getNextDir()
+{
+    return nextDir;
+}
 int Pacman::getC(){
     return c;
 }
@@ -71,6 +76,10 @@ void Pacman::setLives(int l)
 void Pacman::setWaka(int w)
 {
     waka = w;
+}
+void Pacman::setNextDir(int d)
+{
+    nextDir = d;
 }
 void Pacman::setState(int st)
 {
@@ -131,7 +140,10 @@ bool Pacman::eat(Tile map[36][28], int& count)
 
 void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
 {
-    switch(getDirection())
+
+    bool moved = false;
+
+    switch(nextDir)
     {
         case RIGHT: if(map[r][c + 1].isPath()){
                         setCenter(Point(center.x + 1, r * 25 + 12));
@@ -141,14 +153,19 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
                             c++;
                         }
 
+                        setDirection(nextDir);
+                        nextDir = -1;
+                        moved = true;
+
                     }
                     else if(r==17&&c==27){
                         setCenter(Point(center.x + 1, center.y));
                         if(center.x >= c * 25 + 12)
-                        {
                             setCenter(Point(12, center.y));
                             c=0;
-                        }
+                            setDirection(nextDir);
+                            nextDir = -1;
+                            moved = true;
                     }
                     break;
         case LEFT:  if(map[r][c - 1].isPath()){
@@ -157,6 +174,9 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
                         {
                             c--;
                         }
+                        setDirection(nextDir);
+                        nextDir = -1;
+                        moved = true;
                     }
                     else if(r==17&&c==0){
                         setCenter(Point(center.x - 1, center.y));
@@ -164,6 +184,10 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
                         {
                             setCenter(Point(27 * 25 + 12, center.y));
                             c=27;
+
+                            setDirection(nextDir);
+                            nextDir = -1;
+                            moved = true;
                         }
                     }
                     break;
@@ -173,6 +197,9 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
                        {
                             r--;
                        }
+                       setDirection(nextDir);
+                       nextDir = -1;
+                       moved = true;
 
                     }
                     break;
@@ -182,9 +209,70 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
                         {
                             r++;
                         }
+                        setDirection(nextDir);
+                        nextDir = -1;
+                        moved = true;
                     }
                     break;
     }
+
+    if(!moved)
+    {
+        switch(getDirection())
+        {
+            case RIGHT: if(map[r][c + 1].isPath()){
+                            setCenter(Point(center.x + 1, r * 25 + 12));
+
+                            if(center.x == (c + 1) * 25 + 12)
+                            {
+                                c++;
+                            }
+
+                        }
+                        else if(r==17&&c==27){
+                            setCenter(Point(center.x + 1, center.y));
+                            if(center.x >= c * 25 + 12)
+                                setCenter(Point(12, center.y));
+                                c=0;
+                        }
+                        break;
+            case LEFT:  if(map[r][c - 1].isPath()){
+                            setCenter(Point(center.x - 1, r * 25 + 12));
+                            if(center.x == (c - 1) * 25 + 12)
+                            {
+                                c--;
+                            }
+                        }
+                        else if(r==17&&c==0){
+                            setCenter(Point(center.x - 1, center.y));
+                            if(center.x <= c * 25 + 12)
+                            {
+                                setCenter(Point(27 * 25 + 12, center.y));
+                                c=27;
+                            }
+                        }
+                        break;
+            case UP:    if(map[r - 1][c].isPath()){
+                           setCenter(Point(c * 25 + 12, center.y-1));
+                           if(center.y == (r - 1) * 25 + 12)
+                           {
+                                r--;
+                           }
+
+                        }
+                        break;
+            case DOWN:  if(map[r + 1][c].isPath()){
+                            setCenter(Point(c * 25 + 12, center.y+1));
+                            if(center.y == (r + 1) * 25 + 12)
+                            {
+                                r++;
+                            }
+                        }
+                        break;
+        }
+    }
+
+    moved = true;
 
 }
 void Pacman::erasePac(SDL_Plotter& g)

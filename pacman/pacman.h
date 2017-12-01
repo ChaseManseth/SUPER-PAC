@@ -32,6 +32,7 @@ class Pacman
         int radius;
         int state;
         int speed;
+        int nextDir;
         int score;
         int waka;
         int direction;
@@ -65,6 +66,13 @@ class Pacman
          *  Postcondition:
          */
         int getWaka();
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
+        int getNextDir();
         /*
          *  Description:
          *  Return:
@@ -128,6 +136,13 @@ class Pacman
          *  Postcondition:
          */
         void setLives(int l);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
+         void setNextDir(int d);
         /*
          *  Description:
          *  Return:

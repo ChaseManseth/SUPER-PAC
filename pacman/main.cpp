@@ -337,24 +337,28 @@ int main(int argc, char** argv)
                                       {
                                             pac.setDirection(RIGHT);
                                       }
+                                      pac.setNextDir(RIGHT);
                                       pac.movePosition(pac.getDirection(), map, g);
                                       break;
                     case LEFT_ARROW:  if(map[pac.getR()][pac.getC() - 1].isPath() && abs(pac.getCenter().y - (pac.getR() * 25 + 12)) <= 4)
                                       {
                                             pac.setDirection(LEFT);
                                       }
+                                      pac.setNextDir(LEFT);
                                       pac.movePosition(pac.getDirection(), map, g);
                                       break;
                     case UP_ARROW:    if(map[pac.getR() - 1][pac.getC()].isPath() && abs(pac.getCenter().x - (pac.getC() * 25 + 12)) <= 4)
                                       {
                                             pac.setDirection(UP);
                                       }
+                                      pac.setNextDir(UP);
                                       pac.movePosition(pac.getDirection(), map, g);
                                       break;
                     case DOWN_ARROW:  if(map[pac.getR() + 1][pac.getC()].isPath() && abs(pac.getCenter().x - (pac.getC() * 25 + 12)) <= 4)
                                       {
                                             pac.setDirection(DOWN);
                                       }
+                                      pac.setNextDir(DOWN);
                                       pac.movePosition(pac.getDirection(), map, g);
                                       break;
                 }
