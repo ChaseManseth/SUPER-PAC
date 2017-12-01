@@ -15,12 +15,22 @@
 struct Point
 {
     double x, y;
-
+    /*
+     *  Description:
+     *  Return:
+     *  Precondition:
+     *  Postcondition:
+     */
     Point()
     {
         x = y = 0;
     }
-
+    /*
+     *  Description:
+     *  Return:
+     *  Precondition:
+     *  Postcondition:
+     */
     Point(double a, double b)
     {
         x = a;

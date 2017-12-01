@@ -37,31 +37,166 @@ class Pacman
         int direction;
 
     public:
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         Pacman(int row, int col);
-
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         int getLives();
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         int getState();
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         int getWaka();
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         int getSpeed();
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         int getDirection();
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         int getScore();
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         Point getCenter();
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         int getR();
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         int getC();
-
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setR(int row);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setC(int col);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setLives(int l);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setState(int st);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setCenter(Point c);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setSpeed(int s);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setWaka(int w);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setDirection(int d);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setScore(int p);
-
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         bool eat(Tile map[36][28], int& count);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void movePosition(int d, Tile map[36][28], SDL_Plotter& g);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void erasePac(SDL_Plotter& g);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void drawPac(SDL_Plotter& g);
 
 };

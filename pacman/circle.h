@@ -27,15 +27,62 @@ class Circle {
         Color color;
 
     public:
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         Circle(Point c, int r, Color col);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setCenter(const Point);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setRadius(const int);
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void setColor(const Color);
 
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         Point getCenter() const;
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         int getRadius() const;
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         Color getColor() const;
-
+        /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
         void draw(SDL_Plotter& g)const;
 };
 

@@ -14,11 +14,21 @@
 
 struct Color {
     int R, G, B;
-
+    /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
     Color() {
         R = G = B = 0;
     }
-
+    /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
     Color(int r, int g, int b) {
         R = r;
         G = g;

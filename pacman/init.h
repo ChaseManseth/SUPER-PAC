@@ -7,7 +7,12 @@
 
 // Remove this on production version
 #include <iostream>
-
+/*
+ *  Description:
+ *  Return:
+ *  Precondition:
+ *  Postcondition:
+ */
 void init(Tile map[36][28], SDL_Plotter& g, int nums[10][25][25], int lets[26][25][25], int graphic[31][25][25]) {
     ifstream inMap, inGraphicsVal, inGraphics;
     bool readBool;

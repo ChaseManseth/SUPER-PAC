@@ -22,16 +22,34 @@ struct Pellet
     int pel[3][3];
     int row, col;
     bool active, isEnergizer;
+    /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
     Pellet(){
         row = col = 0;
         active = false;
     }
+    /*
+         *  Description:
+         *  Return:
+         *  Precondition:
+         *  Postcondition:
+         */
     Pellet(int r, int c, bool energy){
         row = r;
         col = c;
         isEnergizer = energy;
         active = false;
     }
+    /*
+     *  Description:
+     *  Return:
+     *  Precondition:
+     *  Postcondition:
+     */
     void draw(Point p, SDL_Plotter& g){
         if(active && !isEnergizer){
             for(int i = 0; i < 3; i++){
@@ -61,9 +79,21 @@ struct Pellet
             }
         }
     }
+    /*
+     *  Description:
+     *  Return:
+     *  Precondition:
+     *  Postcondition:
+     */
     void setActive(bool b){
         active = b;
     }
+    /*
+     *  Description:
+     *  Return:
+     *  Precondition:
+     *  Postcondition:
+     */
     bool isEner()
     {
         return isEnergizer;
