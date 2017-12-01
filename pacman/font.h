@@ -103,7 +103,7 @@ void updateScore(int score, SDL_Plotter& g,  Tile map[36][28]){
     int col = 8;
     int n = 0;
 
-    for(int max = 1; max < score; max *=10){
+    for(int max = 1; max <= score; max *=10){
         n++;
     }
 

@@ -354,6 +354,7 @@ void Pacman::drawPac(SDL_Plotter& g)
                 l.drawLine(g, Color(0, 0, 0));
             }
         }
+        g.plotPixel(center.x + 12, center.y, 0, 0, 0);
     }
     else if(direction == LEFT && waka != CLOSED_WAKA)
     {
@@ -375,6 +376,7 @@ void Pacman::drawPac(SDL_Plotter& g)
                 l.drawLine(g, Color(0, 0, 0));
             }
         }
+        g.plotPixel(center.x - 12, center.y, 0, 0, 0);
     }
     else if(direction == DOWN && waka != CLOSED_WAKA)
     {

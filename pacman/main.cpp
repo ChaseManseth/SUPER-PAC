@@ -29,7 +29,8 @@ int main(int argc, char** argv)
     Mix_Chunk *gDeath       = NULL;
     Mix_Chunk *gGhostDead   = NULL;
     Mix_Chunk *gPowerPellet = NULL;
-    Mix_Chunk *gGame_Over = NULL;
+    Mix_Chunk *gGame_Over   = NULL;
+    Mix_Chunk *gBegin       = NULL;
     bool releaseCalled = false;
     bool rando    = false;
     int numEaten  = 1;
@@ -49,6 +50,7 @@ int main(int argc, char** argv)
     gAmbient = Mix_LoadMUS("ghosts_ambient.wav");
     gPowerPellet = Mix_LoadWAV("power_pellet_eaten.wav");
     gGame_Over = Mix_LoadWAV("game_over.wav");
+    gBegin = Mix_LoadWAV("pacman_beginning.wav");
 
     Tile map[36][28];
 
@@ -60,15 +62,16 @@ int main(int argc, char** argv)
     init(map, g, nums, lets, graphic);
 
     //prints score
-    initLetter(g, 2, 1, s);
-    initLetter(g, 3, 1, c);
-    initLetter(g, 4, 1, o);
-    initLetter(g, 5, 1, r);
-    initLetter(g, 6, 1, e);
+    initLetter();
+    drawLetter(g, 2, 1, s);
+    drawLetter(g, 3, 1, c);
+    drawLetter(g, 4, 1, o);
+    drawLetter(g, 5, 1, r);
+    drawLetter(g, 6, 1, e);
 
     initNumber();
     Pacman pac(26,13);
-    updateScore(pac.getScore(), g);
+    updateScore(pac.getScore(), g, map);
 
 
     Color blink(255,20,20);
@@ -89,6 +92,16 @@ int main(int argc, char** argv)
 
     char key;
 
+    pinky.draw(g, map);
+    inky.draw(g, map);
+    Blinky.draw(g, map);
+    clyde.draw(g, map);
+
+    g.update();
+
+    Mix_PlayChannel( -1, gBegin, 0 );
+    g.Sleep(4000);
+
     Mix_PlayMusic(gAmbient, -1 );
 
     Mix_VolumeMusic(24);
@@ -100,10 +113,35 @@ int main(int argc, char** argv)
             if(numEaten == 245)
             {
                 //you win
+                Mix_PauseMusic();
                 int score = pac.getScore();
                 pac = Pacman(26, 13);
                 init(map, g, nums, lets, graphic);
                 pac.setScore(score);
+
+                pac.drawPac(g);
+
+                rePositionGhosts(g, Blinky, inky, pinky, clyde, map);
+
+                pinky.draw(g, map);
+                inky.draw(g, map);
+                Blinky.draw(g, map);
+                clyde.draw(g, map);
+
+                drawLetter(g, 2, 1, s);
+                drawLetter(g, 3, 1, c);
+                drawLetter(g, 4, 1, o);
+                drawLetter(g, 5, 1, r);
+                drawLetter(g, 6, 1, e);
+
+                g.update();
+
+                Mix_PlayChannel( -1, gBegin, 0 );
+                g.Sleep(4000);
+
+                numEaten = 1;
+
+                Mix_ResumeMusic();
             }
             map[35][0].drawTile(g);
             map[35][1].drawTile(g);
@@ -229,6 +267,12 @@ int main(int argc, char** argv)
                     pac = Pacman(26, 13);
                     init(map, g, nums, lets, graphic);
                     Mix_ResumeMusic();
+
+                    drawLetter(g, 2, 1, s);
+                    drawLetter(g, 3, 1, c);
+                    drawLetter(g, 4, 1, o);
+                    drawLetter(g, 5, 1, r);
+                    drawLetter(g, 6, 1, e);
                 }
             }
             else if(pac.getState() == SUPERPAC)
@@ -249,7 +293,7 @@ int main(int argc, char** argv)
                 pinky.target(pac);
                 clyde.target(pac);
 
-                if(i % 3 == 0)
+                if(i % 8 == 0)
                 {
                     Blinky.moveFrightened(map, g, pac);
                 }
@@ -259,7 +303,7 @@ int main(int argc, char** argv)
                     pinky.moveFrightened(map, g, pac);
                 }
                 inky.moveFrightened(map, g, pac);
-                if(i % 5 == 0)
+                if(i % 10 == 0)
                 {
                     clyde.moveFrightened(map, g, pac);
                 }
@@ -273,7 +317,7 @@ int main(int argc, char** argv)
                     releaseGhost(Blinky, map, rando);
                     pac.setScore(pac.getScore() + 200);
 
-                    updateScore(pac.getScore(), g);
+                    updateScore(pac.getScore(), g, map);
 
                 }
                 if(inky.isCollide(map, pac, g))
@@ -283,7 +327,7 @@ int main(int argc, char** argv)
                     releaseGhost(inky, map, rando);
                     pac.setScore(pac.getScore() + 200);
 
-                    updateScore(pac.getScore(), g);
+                    updateScore(pac.getScore(), g, map);
 
                 }
                 if(pinky.isCollide(map, pac, g))
@@ -294,7 +338,7 @@ int main(int argc, char** argv)
                     pac.setScore(pac.getScore() + 200);
 
 
-                    updateScore(pac.getScore(), g);
+                    updateScore(pac.getScore(), g, map);
 
                 }
                 if(clyde.isCollide(map, pac, g))
@@ -304,7 +348,7 @@ int main(int argc, char** argv)
                     releaseGhost(clyde, map, rando);
                     pac.setScore(pac.getScore() + 200);
 
-                    updateScore(pac.getScore(), g);
+                    updateScore(pac.getScore(), g, map);
 
                 }
 
@@ -328,7 +372,6 @@ int main(int argc, char** argv)
 
             }
 
-
             if(pac.eat(map, counter))
             {
                 //eat function sets counter to 0 to show
@@ -341,11 +384,11 @@ int main(int argc, char** argv)
                 releaseCalled = false;
                 numEaten++;
                 Mix_PlayChannel( -1, gEat, 0 );
-                updateScore(pac.getScore(), g);
+                updateScore(pac.getScore(), g, map);
             }
 
             //releasing ghosts based on pellet eating
-            if(numEaten % 5 == 0 && !releaseCalled)
+            if(numEaten % 5 == 0 && !releaseCalled && numEaten != 0)
             {
                 if(!Blinky.getActive())
                 {
