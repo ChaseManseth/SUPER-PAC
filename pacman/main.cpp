@@ -32,6 +32,7 @@ int main(int argc, char** argv)
     bool releaseCalled = false;
     bool rando    = false;
     int numEaten  = 1;
+
     int counter   = 0;
     int prevScore = 0;
     SDL_Plotter g(900,700);
@@ -63,7 +64,10 @@ int main(int argc, char** argv)
     initLetter(g, 5, 1, r);
     initLetter(g, 6, 1, e);
 
+    initNumber();
     Pacman pac(26,13);
+    updateScore(pac.getScore(), g);
+
 
     Color blink(255,20,20);
     Ghost Blinky(blink, map);
@@ -220,6 +224,9 @@ int main(int argc, char** argv)
                     g.Sleep(250);
                     releaseGhost(Blinky, map, rando);
                     pac.setScore(pac.getScore() + 200);
+
+                    updateScore(pac.getScore(), g);
+
                 }
                 if(inky.isCollide(map, pac, g))
                 {
@@ -227,6 +234,9 @@ int main(int argc, char** argv)
                     g.Sleep(250);
                     releaseGhost(inky, map, rando);
                     pac.setScore(pac.getScore() + 200);
+
+                    updateScore(pac.getScore(), g);
+
                 }
                 if(pinky.isCollide(map, pac, g))
                 {
@@ -234,6 +244,10 @@ int main(int argc, char** argv)
                     g.Sleep(250);
                     releaseGhost(pinky, map, rando);
                     pac.setScore(pac.getScore() + 200);
+
+
+                    updateScore(pac.getScore(), g);
+
                 }
                 if(clyde.isCollide(map, pac, g))
                 {
@@ -241,6 +255,9 @@ int main(int argc, char** argv)
                     g.Sleep(250);
                     releaseGhost(clyde, map, rando);
                     pac.setScore(pac.getScore() + 200);
+
+                    updateScore(pac.getScore(), g);
+
                 }
 
                 Blinky.draw(g, map);
@@ -276,6 +293,7 @@ int main(int argc, char** argv)
                 releaseCalled = false;
                 numEaten++;
                 Mix_PlayChannel( -1, gEat, 0 );
+                updateScore(pac.getScore(), g);
             }
 
             //releasing ghosts based on pellet eating
@@ -353,11 +371,6 @@ int main(int argc, char** argv)
                 pac.movePosition(pac.getDirection(), map, g);
             }
             g.Sleep(15);
-            //NOT FUNCTIONAL YET! updates the score       ...should this be placed somewhere else???????
-            //if(pac.getScore() != prevScore){
-                //eraseScore();
-                //updateScore(pac.getScore(), g);
-            //}
         }
     }
 

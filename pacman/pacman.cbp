@@ -41,6 +41,7 @@
 		<Unit filename="circle.cpp" />
 		<Unit filename="circle.h" />
 		<Unit filename="color.h" />
+		<Unit filename="font.h" />
 		<Unit filename="ghosts.cpp" />
 		<Unit filename="ghosts.h" />
 		<Unit filename="init.h" />
