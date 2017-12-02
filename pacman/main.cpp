@@ -472,6 +472,24 @@ int main(int argc, char** argv)
             }
 
             pac.erasePac(g);
+            //redraw tiles around pacman in case he overlaps any of those tiles
+            map[pac.getR()][pac.getC()].drawTile(g);
+            if(map[pac.getR() + 1][pac.getC()].isPath())
+            {
+                map[pac.getR() + 1][pac.getC()].drawTile(g);
+            }
+            if(map[pac.getR() - 1][pac.getC()].isPath())
+            {
+                map[pac.getR() - 1][pac.getC()].drawTile(g);
+            }
+            if(map[pac.getR()][pac.getC() + 1].isPath())
+            {
+                map[pac.getR()][pac.getC() + 1].drawTile(g);
+            }
+            if(map[pac.getR()][pac.getC() - 1].isPath())
+            {
+                map[pac.getR()][pac.getC() - 1].drawTile(g);
+            }
             pac.movePosition(pac.getDirection(), map, g);
 
             //dictates pacman speed, adds extra moving
