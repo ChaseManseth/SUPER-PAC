@@ -4,8 +4,8 @@
 * Assignment Title:  Pacman Group Project
 * Assignment Description: User can play a faithfully recreated
 * version of pacman.
-* Due Date: 11/29/2017
-* Date Created: 11/1/2017
+* Due Date: 12/4/2017
+* Date Created: 11/2/2017
 * Date Last Modified: 11/11/2017
 */
 
@@ -15,19 +15,19 @@
 struct Color {
     int R, G, B;
     /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Blank constructor for Color
+         *  Return: none
+         *  Precondition: none
+         *  Postcondition: R, G, and B are assigned 0
          */
     Color() {
         R = G = B = 0;
     }
     /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Constructor for Color
+         *  Return: none
+         *  Precondition: r, g, and b exist
+         *  Postcondition: R, G, and B are assigned r, g, and b respectively
          */
     Color(int r, int g, int b) {
         R = r;
