@@ -844,3 +844,93 @@
 1512163337 source:h:\super-pac-master\pacman\tile.cpp
 	"tile.h"
 
+1512253213 source:c:\users\steudel\documents\super-pac-master\pacman\ghosts.cpp
+	"ghosts.h"
+
+1512253213 c:\users\steudel\documents\super-pac-master\pacman\ghosts.h
+	"pacman.h"
+	"SDL_Plotter.h"
+	"tile.h"
+	<queue>
+	"color.h"
+	"point.h"
+	<cmath>
+
+1512253457 c:\users\steudel\documents\super-pac-master\pacman\pacman.h
+	"point.h"
+	"color.h"
+	"line.h"
+	"SDL_Plotter.h"
+	"tile.h"
+	<cmath>
+
+1512253213 c:\users\steudel\documents\super-pac-master\pacman\point.h
+
+1512253213 c:\users\steudel\documents\super-pac-master\pacman\color.h
+
+1512253213 c:\users\steudel\documents\super-pac-master\pacman\line.h
+	"SDL_Plotter.h"
+	"point.h"
+	"color.h"
+
+1512253213 c:\users\steudel\documents\super-pac-master\pacman\sdl_plotter.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<string.h>
+	<iostream>
+	<string>
+	<string.h>
+	<map>
+
+1512253213 c:\users\steudel\documents\super-pac-master\pacman\tile.h
+	"SDL_Plotter.h"
+	"point.h"
+	"pellet.h"
+
+1512254210 c:\users\steudel\documents\super-pac-master\pacman\pellet.h
+	"point.h"
+	"tile.h"
+	<cmath>
+	"SDL_Plotter.h"
+
+1512253213 source:c:\users\steudel\documents\super-pac-master\pacman\line.cpp
+	"line.h"
+
+1512253244 source:c:\users\steudel\documents\super-pac-master\pacman\main.cpp
+	<iostream>
+	<fstream>
+	"pacman.h"
+	"tile.h"
+	"ghosts.h"
+	"init.h"
+	"font.h"
+
+1512253213 c:\users\steudel\documents\super-pac-master\pacman\init.h
+	"SDL_Plotter.h"
+	<fstream>
+
+1512253446 c:\users\steudel\documents\super-pac-master\pacman\font.h
+	"SDL_Plotter.h"
+	"color.h"
+	<iostream>
+	<fstream>
+	"map.h"
+	"SDL_Plotter.h"
+	<sstream>
+	<string>
+	<cstdlib>
+	"tile.h"
+
+1512253213 c:\users\steudel\documents\super-pac-master\pacman\map.h
+	<iostream>
+	<fstream>
+
+1512253457 source:c:\users\steudel\documents\super-pac-master\pacman\pacman.cpp
+	"pacman.h"
+	"tile.h"
+	<iostream>
+	<cstdlib>
+
+1512253213 source:c:\users\steudel\documents\super-pac-master\pacman\tile.cpp
+	"tile.h"
+

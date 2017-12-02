@@ -23,21 +23,21 @@ struct Pellet
     int row, col;
     bool active, isEnergizer;
     /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
-         */
+     *  Description: default constructor
+     *  Return: none
+     *  Precondition: none
+     *  Postcondition: row and col = 0, active = false;
+     */
     Pellet(){
         row = col = 0;
         active = false;
     }
     /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
-         */
+     *  Description: constructor for pellet
+     *  Return: none
+     *  Precondition: r, c, energy are all valid
+     *  Postcondition: row, col, isEnergizer are all set to parameters.
+    */
     Pellet(int r, int c, bool energy){
         row = r;
         col = c;
@@ -45,10 +45,10 @@ struct Pellet
         active = false;
     }
     /*
-     *  Description:
-     *  Return:
-     *  Precondition:
-     *  Postcondition:
+     *  Description: draws pellet
+     *  Return: none
+     *  Precondition: point p and g are valid
+     *  Postcondition: pellet is now drawn
      */
     void draw(Point p, SDL_Plotter& g){
         if(active && !isEnergizer){
@@ -80,19 +80,19 @@ struct Pellet
         }
     }
     /*
-     *  Description:
-     *  Return:
-     *  Precondition:
-     *  Postcondition:
+     *  Description: sets pellet to active
+     *  Return: none
+     *  Precondition: bool b is valid
+     *  Postcondition: active is b
      */
     void setActive(bool b){
         active = b;
     }
     /*
-     *  Description:
-     *  Return:
-     *  Precondition:
-     *  Postcondition:
+     *  Description: checks if pellet is an energizer
+     *  Return: bool
+     *  Precondition: none
+     *  Postcondition: returns if it is an energizer
      */
     bool isEner()
     {
