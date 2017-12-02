@@ -12,7 +12,12 @@
 #include "ghosts.h"
 
 Ghost::Ghost(){
-
+    color = Color(255,0,0);
+    dir = LEFT;
+    r = 16;
+    c = 13;
+    radius = 12;
+    active = false;
 
 }
 Ghost::Ghost(Color Col, Tile map[36][28]){
@@ -72,15 +77,16 @@ void Ghost::setC(int col)
 
 bool Ghost::isCollide(Tile map[36][28], Pacman& p, SDL_Plotter& g)
 {
+    bool flag = false;
     if((getCenter().x + 8 >= p.getCenter().x - 8 && getCenter().x - 8 <= p.getCenter().x - 8 && r == p.getR()) || //right
        (getCenter().x - 8 <= p.getCenter().x + 8 && getCenter().x + 8 >= p.getCenter().x + 8 && r == p.getR()) || //left
        (getCenter().y - 8 <= p.getCenter().y + 8 && getCenter().y + 8 >= p.getCenter().y - 8 && c == p.getC()) || //up
        (getCenter().y + 8 >= p.getCenter().y - 8 && getCenter().y - 8 <= p.getCenter().y + 8 && c == p.getC()))   //down
     {
-        return true;
+        flag = true;
     }
 
-    return false;
+    return flag;
 }
 
 
@@ -126,50 +132,50 @@ void Ghost::move(Tile map[36][28], SDL_Plotter& g){
     double u, l, d, ri;
     u = l = d = ri = 1000000;
     bool flag = false;
-    queue<int> BlinkyDir;
-    BlinkyDir.push(UP);
-    BlinkyDir.push(LEFT);
-    BlinkyDir.push(DOWN);
-    BlinkyDir.push(RIGHT);
+    queue<int> ghostQueue;
+    ghostQueue.push(UP);
+    ghostQueue.push(LEFT);
+    ghostQueue.push(DOWN);
+    ghostQueue.push(RIGHT);
     while(!flag){
-        if(BlinkyDir.front() == UP){
+        if(ghostQueue.front() == UP){
             if(moveUp(map,g, u)){
                 flag = true;
-                BlinkyDir.pop();
+                ghostQueue.pop();
             }
             else{
-                BlinkyDir.pop();
-                BlinkyDir.push(UP);
+                ghostQueue.pop();
+                ghostQueue.push(UP);
             }
         }
-        if(BlinkyDir.front() == LEFT){
+        if(ghostQueue.front() == LEFT){
             if(moveLeft(map,g, l)){
                 flag = true;
-                BlinkyDir.pop();
+                ghostQueue.pop();
             }
             else{
-                BlinkyDir.pop();
-                BlinkyDir.push(LEFT);
+                ghostQueue.pop();
+                ghostQueue.push(LEFT);
             }
         }
-        if(BlinkyDir.front() == DOWN){
+        if(ghostQueue.front() == DOWN){
             if(moveDown(map,g, d)){
                 flag = true;
-                BlinkyDir.pop();
+                ghostQueue.pop();
             }
             else{
-                BlinkyDir.pop();
-                BlinkyDir.push(DOWN);
+                ghostQueue.pop();
+                ghostQueue.push(DOWN);
             }
         }
-        if(BlinkyDir.front() == RIGHT){
+        if(ghostQueue.front() == RIGHT){
             if(moveRight(map,g, ri)){
                 flag = true;
-                BlinkyDir.pop();
+                ghostQueue.pop();
             }
             else{
-                BlinkyDir.pop();
-                BlinkyDir.push(RIGHT);
+                ghostQueue.pop();
+                ghostQueue.push(RIGHT);
             }
         }
     }
@@ -240,50 +246,50 @@ void Ghost::moveFrightened(Tile map[36][28], SDL_Plotter& g, Pacman pac)
     double u, l, d, ri;
     u = l = d = ri = -1000000;
     bool flag = false;
-    queue<int> BlinkyDir;
-    BlinkyDir.push(UP);
-    BlinkyDir.push(LEFT);
-    BlinkyDir.push(DOWN);
-    BlinkyDir.push(RIGHT);
+    queue<int> ghostQueue;
+    ghostQueue.push(UP);
+    ghostQueue.push(LEFT);
+    ghostQueue.push(DOWN);
+    ghostQueue.push(RIGHT);
     while(!flag){
-        if(BlinkyDir.front() == UP){
+        if(ghostQueue.front() == UP){
             if(moveUp(map,g, u)){
                 flag = true;
-                BlinkyDir.pop();
+                ghostQueue.pop();
             }
             else{
-                BlinkyDir.pop();
-                BlinkyDir.push(UP);
+                ghostQueue.pop();
+                ghostQueue.push(UP);
             }
         }
-        if(BlinkyDir.front() == LEFT){
+        if(ghostQueue.front() == LEFT){
             if(moveLeft(map,g, l)){
                 flag = true;
-                BlinkyDir.pop();
+                ghostQueue.pop();
             }
             else{
-                BlinkyDir.pop();
-                BlinkyDir.push(LEFT);
+                ghostQueue.pop();
+                ghostQueue.push(LEFT);
             }
         }
-        if(BlinkyDir.front() == DOWN){
+        if(ghostQueue.front() == DOWN){
             if(moveDown(map,g, d)){
                 flag = true;
-                BlinkyDir.pop();
+                ghostQueue.pop();
             }
             else{
-                BlinkyDir.pop();
-                BlinkyDir.push(DOWN);
+                ghostQueue.pop();
+                ghostQueue.push(DOWN);
             }
         }
-        if(BlinkyDir.front() == RIGHT){
+        if(ghostQueue.front() == RIGHT){
             if(moveRight(map,g, ri)){
                 flag = true;
-                BlinkyDir.pop();
+                ghostQueue.pop();
             }
             else{
-                BlinkyDir.pop();
-                BlinkyDir.push(RIGHT);
+                ghostQueue.pop();
+                ghostQueue.push(RIGHT);
             }
         }
     }
@@ -354,11 +360,6 @@ void Ghost::target(Pacman pac){
     targetR = pac.getR();
 }
 
-double Ghost::distance(Point p1, Point p2)
-{
-    return sqrt(pow(p1.x - p2.x, 2.0) + pow(p1.y - p2.y, 2.0));
-}
-
 void Ghost::draw(SDL_Plotter& g, Tile map[36][28])const{
     for(int x = -radius; x <= radius; x++)
     {
@@ -386,77 +387,3 @@ void Ghost::erase(SDL_Plotter& g, Tile map[36][28])const{
     }
 
 }
-
-/*void Ghost::move(Tile map[36][28], SDL_Plotter& g){
-    double dist = 9999;
-    int d = dir;
-    for(int directions = 1; directions <= 4; directions++)
-    {
-        if(directions == UP && map[r - 1][c].isPath())
-        {
-            if(dir != DOWN)
-            {
-                dist = distance(Point(c, r - 1), Point(targetC, targetR));
-                d = UP;
-            }
-        }
-        else if(directions == LEFT && map[r][c - 1].isPath())
-        {
-            if(distance(Point(c - 1, r), Point(targetC, targetR)) < dist && dir != RIGHT)
-            {
-                dist = distance(Point(c - 1, r), Point(targetC, targetR));
-                d = LEFT;
-            }
-        }
-        else if(directions == DOWN && map[r + 1][c].isPath())
-        {
-            if(distance(Point(c, r + 1), Point(targetC, targetR)) < dist && dir != UP)
-            {
-                dist = distance(Point(c, r + 1), Point(targetC, targetR));
-                d = DOWN;
-            }
-        }
-        else if(map[r][c + 1].isPath())
-        {
-            if(distance(Point(c + 1, r), Point(targetC, targetR)) < dist && dir != LEFT)
-            {
-                dist = distance(Point(c + 1, r), Point(targetC, targetR));
-                d = RIGHT;
-            }
-        }
-    }
-    dir = d;
-
-    if(dir == UP && map[r - 1][c].isPath())
-    {
-        setCenter(Point(c * 25 + 12, center.y-1));
-        if(center.y == (r - 1) * 25 + 12)
-        {
-            r--;
-        }
-    }
-    else if(dir == LEFT && map[r][c - 1].isPath())
-    {
-        setCenter(Point(center.x - 1, r * 25 + 12));
-        if(center.x == (c - 1) * 25 + 12)
-        {
-            c--;
-        }
-    }
-    else if(dir == DOWN && map[r + 1][c].isPath())
-    {
-        setCenter(Point(c * 25 + 12, center.y+1));
-        if(center.y == (r + 1) * 25 + 12)
-        {
-            r++;
-        }
-    }
-    else if(dir == RIGHT && map[r][c + 1].isPath())
-    {
-        setCenter(Point(center.x + 1, r * 25 + 12));
-        if(center.x == (c + 1) * 25 + 12)
-        {
-            c++;
-        }
-    }
-}*/
