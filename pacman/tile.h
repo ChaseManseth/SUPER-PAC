@@ -53,115 +53,115 @@ class Tile
          */
         int getRow();
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Returns c
+         *  Return: int
+         *  Precondition: none
+         *  Postcondition: c is returned
          */
         int getCol();
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Returns posX
+         *  Return: int
+         *  Precondition: none
+         *  Postcondition: posX is returned
          */
         int getPosX();
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Returns posY
+         *  Return: int
+         *  Precondition: none
+         *  Postcondition: posY is returned
          */
         int getPosY();
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Returns the Point object center
+         *  Return: Point
+         *  Precondition: none
+         *  Postcondition: center is returned
          */
         Point getCenter();
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Returns pel
+         *  Return: Pellet
+         *  Precondition: none
+         *  Postcondition: pel is returned
          */
         Pellet getPel();
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Returns graphicValue
+         *  Return: int
+         *  Precondition: none
+         *  Postcondition: graphicValue is returned
          */
         int getGraphicVal();
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Sets the r
+         *  Return: void
+         *  Precondition: int
+         *  Postcondition: r is set to row
          */
         void setRow(int row);
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Sets pel
+         *  Return: void
+         *  Precondition: none
+         *  Postcondition: sets the value of pel to true or false.
          */
         void setPel();
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Sets the tiles pel to energy or to nothing
+         *  Return: void
+         *  Precondition: none
+         *  Postcondition: sets Energy for the tile
          */
         void setEnergy();
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Sets c
+         *  Return: void
+         *  Precondition: int
+         *  Postcondition: sets c to col
          */
         void setCol(int col);
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Sets isValid or isPath
+         *  Return: void
+         *  Precondition: bool isP
+         *  Postcondition: sets isValid to isP
          */
         void setPath(bool isP);
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Sets Pel state
+         *  Return: void
+         *  Precondition: bool active
+         *  Postcondition: sets Pel state to active
          */
         void setPel(bool active);
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Sets the Graphic Value for the tile
+         *  Return: void
+         *  Precondition: int a
+         *  Postcondition: sets graphicValue to a
          */
         void setGraphicVal(int a);
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Checks the isValid boolean and returns it
+         *  Return: boolean
+         *  Precondition: none
+         *  Postcondition: returns the isValid value
          */
         bool isPath();
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Draws the tile
+         *  Return: void
+         *  Precondition: SDL_Plotter object
+         *  Postcondition: Sets a tile blank
          */
         void drawTile(SDL_Plotter& g);
         /*
-         *  Description:
-         *  Return:
-         *  Precondition:
-         *  Postcondition:
+         *  Description: Draws a tile based on the graphic array
+         *  Return: void
+         *  Precondition: SDL_Plotter object and 3 dimensional int array
+         *  Postcondition: Sets a tile to its corresponding graphic
          */
         void drawTile(SDL_Plotter& g, int graphic[31][25][25]);
 

@@ -1,17 +1,25 @@
+/*
+* Author: Zachary Steudel, Chase Manseth, Meghan Bibb,
+* Will Rhoden, Bailey Stone
+* Assignment Title:  Pacman Group Project
+* Assignment Description: User can play a faithfully recreated
+* version of pacman.
+* Due Date: 11/29/2017
+* Date Created: 11/1/2017
+* Date Last Modified: 11/11/2017
+*/
 #ifndef INIT_H_INCLUDED
 #define INIT_H_INCLUDED
 
 #include "SDL_Plotter.h"
 #include <fstream>
 
-
-// Remove this on production version
-#include <iostream>
 /*
- *  Description:
- *  Return:
- *  Precondition:
- *  Postcondition:
+ *  Description: This function is used to initialize the entire map.
+ *      It loads all font letters and number as well as the map tiles and tile graphics.
+ *  Return: void
+ *  Precondition: It requires a Tile map, SDL_Plotter object, and three int arrays
+ *  Postcondition: N/A
  */
 void init(Tile map[36][28], SDL_Plotter& g, int nums[10][25][25], int lets[26][25][25], int graphic[31][25][25]) {
     ifstream inMap, inGraphicsVal, inGraphics;
@@ -32,7 +40,7 @@ void init(Tile map[36][28], SDL_Plotter& g, int nums[10][25][25], int lets[26][2
         }
     }
 
-    // Set specific tiles to isPath to ture
+    // Set specific tiles to isPath to true
     for(int r = 0; r < 36; r++)
     {
         for(int c = 0; c < 28; c++)
@@ -81,7 +89,6 @@ void init(Tile map[36][28], SDL_Plotter& g, int nums[10][25][25], int lets[26][2
         }
 
     }
-
 
     // Draw all the wall graphic tiles
     for(int r = 0; r < 36; r++)
