@@ -303,12 +303,6 @@ int main(int argc, char** argv)
                     counter++;
                 }
 
-                //set ghosts dark blue
-                blinky.setColor(Color(0, 0, 205));
-                inky.setColor(Color(0, 0, 205));
-                pinky.setColor(Color(0, 0, 205));
-                clyde.setColor(Color(0, 0, 205));
-
                 blinky.target(pac);
                 inky.target(pac);
                 pinky.target(pac);
@@ -336,7 +330,11 @@ int main(int argc, char** argv)
                 {
                     Mix_PlayChannel( -1, gGhostDead, 0 );
                     g.Sleep(250);
-                    releaseGhost(blinky, map, rando);
+                    blinky.setR(16);
+                    blinky.setC(16);
+                    blinky.setCenter(map[16][16].getCenter());
+                    blinky.setActive(false);
+                    blinky.setColor(blink);
                     pac.setScore(pac.getScore() + 200);
 
                     updateScore(pac.getScore(), g, map);
@@ -346,7 +344,11 @@ int main(int argc, char** argv)
                 {
                     Mix_PlayChannel( -1, gGhostDead, 0 );
                     g.Sleep(250);
-                    releaseGhost(inky, map, rando);
+                    inky.setR(16);
+                    inky.setC(14);
+                    inky.setCenter(map[16][14].getCenter());
+                    inky.setActive(false);
+                    inky.setColor(ink);
                     pac.setScore(pac.getScore() + 200);
 
                     updateScore(pac.getScore(), g, map);
@@ -356,7 +358,11 @@ int main(int argc, char** argv)
                 {
                     Mix_PlayChannel( -1, gGhostDead, 0 );
                     g.Sleep(250);
-                    releaseGhost(pinky, map, rando);
+                    pinky.setR(16);
+                    pinky.setC(15);
+                    pinky.setCenter(map[16][15].getCenter());
+                    pinky.setActive(false);
+                    pinky.setColor(pink);
                     pac.setScore(pac.getScore() + 200);
 
 
@@ -367,7 +373,11 @@ int main(int argc, char** argv)
                 {
                     Mix_PlayChannel( -1, gGhostDead, 0 );
                     g.Sleep(250);
-                    releaseGhost(clyde, map, rando);
+                    clyde.setR(16);
+                    clyde.setC(13);
+                    clyde.setCenter(map[16][13].getCenter());
+                    clyde.setActive(false);
+                    clyde.setColor(cly);
                     pac.setScore(pac.getScore() + 200);
 
                     updateScore(pac.getScore(), g, map);
@@ -380,7 +390,8 @@ int main(int argc, char** argv)
                 clyde.draw(g, map);
 
                 //after some seconds, set pacman back to vulnerable
-                if(counter == 12)
+                if(counter == 12 || (!blinky.getActive() && !inky.getActive()
+                                     && !clyde.getActive() && !pinky.getActive()))
                 {
                     pac.setState(NORMAL);
 
@@ -402,6 +413,12 @@ int main(int argc, char** argv)
                 {
                     Mix_PlayChannel( -1, gPowerPellet, 0 );
                     counter = 0;
+
+                    //set ghosts dark blue
+                    blinky.setColor(Color(0, 0, 205));
+                    inky.setColor(Color(0, 0, 205));
+                    pinky.setColor(Color(0, 0, 205));
+                    clyde.setColor(Color(0, 0, 205));
                 }
                 releaseCalled = false;
                 numEaten++;
@@ -410,7 +427,8 @@ int main(int argc, char** argv)
             }
 
             //releasing ghosts based on pellet eating
-            if(numEaten % 5 == 0 && !releaseCalled && numEaten != 0)
+            if(numEaten % 5 == 0 && !releaseCalled && numEaten != 0
+               && pac.getState() == NORMAL)
             {
                 if(!blinky.getActive())
                 {
@@ -468,7 +486,6 @@ int main(int argc, char** argv)
                                       pac.setNextDir(DOWN);
                                       break;
                 }
-
             }
 
             pac.erasePac(g);
