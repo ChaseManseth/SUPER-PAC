@@ -112,7 +112,7 @@ void initNumber(){
 
     inNum.open("nums.txt");
 
-    // Import number
+    // Imports numbers
     for(int i = 0; i < NUMCOUNT; i++) {
         for(int j = 0; j < ROWCOUNT; j++) {
             for(int k = 0; k < COLCOUNT; k++) {
@@ -128,8 +128,8 @@ void printNum(SDL_Plotter& g, int c, int r, int num)
 {
     int startX = c * 25;
     int startY = r * 25;
-    //prints single character
 
+    //prints single character
     for(int row = 0; row < ROWCOUNT; row++) {
         for(int col = 0; col < COLCOUNT; col++) {
             if(numbers[num][row][col] == 1) {
@@ -141,23 +141,26 @@ void printNum(SDL_Plotter& g, int c, int r, int num)
 
 void updateScore(int score, SDL_Plotter& g,  Tile map[36][28]){
 
-    int row = 1;  //stubbed values
+    int row = 1;
     int col = 7;
     int n = 0;
+    //n is the number of digits in score
 
+    //counts the number of digits in score
     for(int max = 1; max <= score; max *=10){
         n++;
     }
 
-    for(int i = 0; i < n;i++){
+    // erases the previous score
+    for(int i = 0; i < n; i++){
         map[row][col+n-i].drawTile(g);
     }
 
+    //prints each digit of score
     for(int i = 0; i < n; i++){
         printNum(g, col+n-i, row, score%10);
         score /= 10;
     }
-
 }
 #endif // FONT_H_INCLUDED
 
