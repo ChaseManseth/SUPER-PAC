@@ -3,10 +3,10 @@
 * Will Rhoden, Bailey Stone
 * Assignment Title:  Pacman Group Project
 * Assignment Description: User can play a faithfully recreated
-* version of pacman.
-* Due Date: 11/29/2017
-* Date Created: 11/1/2017
-* Date Last Modified: 11/11/2017
+*                         version of pacman.
+* Due Date: 12/4/2017
+* Date Created: 11/19/2017
+* Date Last Modified: 12/1/2017
 */
 
 #ifndef FONT_H_INCLUDED
@@ -32,6 +32,49 @@ const int NUMCOUNT = 10;
 enum letter{a = 0,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z};
 char font[CHARCOUNT][COLCOUNT][ROWCOUNT];
 int numbers[NUMCOUNT][COLCOUNT][ROWCOUNT];
+
+        /*
+         * Description: The function reads the data from
+         *              "font.txt" to the three-dimensional array font
+         * Return: none
+         * Precondition: "font.txt" has data
+         * Postcondition: the font array has enough data to print the alphabet
+         */
+void initLetter();
+        /*
+         * Description: A single letter is drawn
+         * Return: none
+         * Precondition: g, c, r, and ltr exist
+         * Postcondition: A letter, indicated by the enum ltr,
+         *                is drawn to the SDL Plotter
+         */
+void drawLetter(SDL_Plotter& g, int c, int r, letter ltr);
+        /*
+         * Description: The function reads the data from
+         *              "nums.txt" to the three-dimensional array font
+         * Return: none
+         * Precondition: "nums.txt" has data
+         * Postcondition: the font array has enough data
+         *                to print the numbers 0-9
+         */
+void initNumber();
+        /*
+         * Description: A single number is drawn
+         * Return: none
+         * Precondition: g, c, r, and num exist
+         * Postcondition: A number is displayed the SDL Plotter
+         */
+void printNum(SDL_Plotter& g, int c, int r, int num);
+        /*
+         * Description: Uses the printNum() function
+         *              to print the new value of score
+         * Return: none
+         * Precondition: g, score, and map exist
+         * Postcondition: The current score is displayed on the SDL Plotter
+         */
+void updateScore(int score, SDL_Plotter& g, Tile map[36][28]);
+
+
 
 void initLetter(){
     ifstream inFont;
@@ -98,9 +141,8 @@ void printNum(SDL_Plotter& g, int c, int r, int num)
 
 void updateScore(int score, SDL_Plotter& g,  Tile map[36][28]){
 
-
     int row = 1;  //stubbed values
-    int col = 8;
+    int col = 7;
     int n = 0;
 
     for(int max = 1; max <= score; max *=10){
@@ -116,13 +158,7 @@ void updateScore(int score, SDL_Plotter& g,  Tile map[36][28]){
         score /= 10;
     }
 
-
 }
-
-void eraseScore(){
-
-}
-
 #endif // FONT_H_INCLUDED
 
 
