@@ -20,51 +20,49 @@ Pacman::Pacman(int row, int col)
     r = row;
     c = col;
     lives = 3;
-    speed = 1;
     radius = 12;
     score = 0;
     direction = RIGHT;
     nextDir = -1;
     waka = CLOSED_WAKA;
-    center = Point(c * SIZE_TILE + 12,r * SIZE_TILE + 12);
+    center = Point(c * SIZE_TILE + MID_PIXEL_OF_TILE,
+                   r * SIZE_TILE + MID_PIXEL_OF_TILE);
 }
 
-int Pacman::getLives()
+int Pacman::getLives() const
 {
     return lives;
 }
-int Pacman::getSpeed()
-{
-    return speed;
-}
-int Pacman::getWaka()
+int Pacman::getWaka()  const
 {
     return waka;
 }
-int Pacman::getDirection()
+int Pacman::getDirection()  const
 {
     return direction;
 }
-int Pacman::getState()
+int Pacman::getState() const
 {
     return state;
 }
-int Pacman::getScore()
+int Pacman::getScore() const
 {
     return score;
 }
 
-int Pacman::getR(){
+int Pacman::getR() const
+{
     return r;
 }
-int Pacman::getNextDir()
+int Pacman::getNextDir() const
 {
     return nextDir;
 }
-int Pacman::getC(){
+int Pacman::getC() const
+{
     return c;
 }
-Point Pacman::getCenter()
+Point Pacman::getCenter() const
 {
     return center;
 }
@@ -84,10 +82,6 @@ void Pacman::setNextDir(int d)
 void Pacman::setState(int st)
 {
     state = st;
-}
-void Pacman::setSpeed(int s)
-{
-    speed = s;
 }
 void Pacman::setDirection(int d)
 {
@@ -111,44 +105,42 @@ void Pacman::setC(int col)
 }
 bool Pacman::eat(Tile map[36][28], int& count)
 {
+    bool foo = false;
     if(map[r][c].getPel().active && !map[r][c].getPel().isEnergizer)
     {
         map[r][c].setPel();
 
         score += 10;
 
-        cout << " " << score;
-
-        return true;
+        foo = true;
     }
     else if(map[r][c].getPel().active && map[r][c].getPel().isEnergizer)
     {
         count = -1;
+
         map[r][c].setPel();
 
         score += 50;
 
-        cout << " " << score;
-
         state = SUPERPAC;
 
-        return true;
+        foo = true;
     }
-    return false;
+    return foo;
 
 }
 
 void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
 {
-
     bool moved = false;
 
     switch(nextDir)
     {
+        //moves pacman right one tile (25 pixels)
         case RIGHT: if(map[r][c + 1].isPath()){
-                        setCenter(Point(center.x + 1, r * 25 + 12));
+                        setCenter(Point(center.x + 1, r * SIZE_TILE + MID_PIXEL_OF_TILE));
 
-                        if(center.x == (c + 1) * 25 + 12)
+                        if(center.x == (c + 1) * SIZE_TILE + MID_PIXEL_OF_TILE)
                         {
                             c++;
                         }
@@ -158,19 +150,23 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
                         moved = true;
 
                     }
+                    //moves pacman through the "tunnel"
                     else if(r==17&&c==27){
                         setCenter(Point(center.x + 1, center.y));
-                        if(center.x >= c * 25 + 12)
-                            setCenter(Point(12, center.y));
+                        if(center.x >= c * SIZE_TILE + MID_PIXEL_OF_TILE)
+                            setCenter(Point(MID_PIXEL_OF_TILE, center.y));
                             c=0;
                             setDirection(nextDir);
                             nextDir = -1;
                             moved = true;
                     }
                     break;
+                    //moves pacman left one tile (25 pixels)
         case LEFT:  if(map[r][c - 1].isPath()){
-                        setCenter(Point(center.x - 1, r * 25 + 12));
-                        if(center.x == (c - 1) * 25 + 12)
+                        setCenter(Point(center.x - 1, r * SIZE_TILE +
+                                        MID_PIXEL_OF_TILE));
+
+                        if(center.x == (c - 1) * SIZE_TILE + MID_PIXEL_OF_TILE)
                         {
                             c--;
                         }
@@ -178,11 +174,13 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
                         nextDir = -1;
                         moved = true;
                     }
+                    //moves pacman through the "tunnel"
                     else if(r==17&&c==0){
                         setCenter(Point(center.x - 1, center.y));
-                        if(center.x <= c * 25 + 12)
+                        if(center.x <= c * SIZE_TILE + MID_PIXEL_OF_TILE)
                         {
-                            setCenter(Point(27 * 25 + 12, center.y));
+                            setCenter(Point(27 * SIZE_TILE + MID_PIXEL_OF_TILE,
+                                            center.y));
                             c=27;
 
                             setDirection(nextDir);
@@ -191,9 +189,12 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
                         }
                     }
                     break;
+                    //moves pacman up one tile (25 pixels)
         case UP:    if(map[r - 1][c].isPath()){
-                       setCenter(Point(c * 25 + 12, center.y-1));
-                       if(center.y == (r - 1) * 25 + 12)
+                       setCenter(Point(c * SIZE_TILE +
+                                       MID_PIXEL_OF_TILE, center.y-1));
+
+                       if(center.y == (r - 1) * SIZE_TILE + MID_PIXEL_OF_TILE)
                        {
                             r--;
                        }
@@ -203,9 +204,12 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
 
                     }
                     break;
+                    //moves pacman down one tile (25 pixels)
         case DOWN:  if(map[r + 1][c].isPath()){
-                        setCenter(Point(c * 25 + 12, center.y+1));
-                        if(center.y == (r + 1) * 25 + 12)
+                        setCenter(Point(c * SIZE_TILE + MID_PIXEL_OF_TILE,
+                                        center.y+1));
+
+                        if(center.y == (r + 1) * SIZE_TILE + MID_PIXEL_OF_TILE)
                         {
                             r++;
                         }
@@ -220,50 +224,64 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
     {
         switch(getDirection())
         {
+            //moves pacman right one tile (25 pixels)
             case RIGHT: if(map[r][c + 1].isPath()){
-                            setCenter(Point(center.x + 1, r * 25 + 12));
+                            setCenter(Point(center.x + 1, r *
+                                            SIZE_TILE + MID_PIXEL_OF_TILE));
 
-                            if(center.x == (c + 1) * 25 + 12)
+                            if(center.x == (c + 1) * SIZE_TILE +MID_PIXEL_OF_TILE)
                             {
                                 c++;
                             }
 
                         }
+                        //moves pacman through the "tunnel"
                         else if(r==17&&c==27){
                             setCenter(Point(center.x + 1, center.y));
-                            if(center.x >= c * 25 + 12)
-                                setCenter(Point(12, center.y));
+                            if(center.x >= c * SIZE_TILE + MID_PIXEL_OF_TILE)
+                                setCenter(Point(MID_PIXEL_OF_TILE, center.y));
                                 c=0;
                         }
                         break;
+                        //moves pacman left one tile (25 pixels)
             case LEFT:  if(map[r][c - 1].isPath()){
-                            setCenter(Point(center.x - 1, r * 25 + 12));
-                            if(center.x == (c - 1) * 25 + 12)
+                            setCenter(Point(center.x - 1,
+                                            r * SIZE_TILE + MID_PIXEL_OF_TILE));
+
+                            if(center.x == (c - 1) * SIZE_TILE + MID_PIXEL_OF_TILE)
                             {
                                 c--;
                             }
                         }
+                        //moves pacman through the "tunnel"
                         else if(r==17&&c==0){
                             setCenter(Point(center.x - 1, center.y));
-                            if(center.x <= c * 25 + 12)
+                            if(center.x <= c * SIZE_TILE + MID_PIXEL_OF_TILE)
                             {
-                                setCenter(Point(27 * 25 + 12, center.y));
+                                setCenter(Point(27 * SIZE_TILE +
+                                                MID_PIXEL_OF_TILE, center.y));
                                 c=27;
                             }
                         }
                         break;
+                        //moves pacman up one tile (25 pixels)
             case UP:    if(map[r - 1][c].isPath()){
-                           setCenter(Point(c * 25 + 12, center.y-1));
-                           if(center.y == (r - 1) * 25 + 12)
+                           setCenter(Point(c * SIZE_TILE +
+                                           MID_PIXEL_OF_TILE, center.y-1));
+
+                           if(center.y == (r - 1) * SIZE_TILE + MID_PIXEL_OF_TILE)
                            {
                                 r--;
                            }
 
                         }
                         break;
+                        //moves pacman up down tile (25 pixels)
             case DOWN:  if(map[r + 1][c].isPath()){
-                            setCenter(Point(c * 25 + 12, center.y+1));
-                            if(center.y == (r + 1) * 25 + 12)
+                            setCenter(Point(c * SIZE_TILE +
+                                            MID_PIXEL_OF_TILE, center.y+1));
+
+                            if(center.y == (r + 1) * SIZE_TILE + MID_PIXEL_OF_TILE)
                             {
                                 r++;
                             }
@@ -273,8 +291,8 @@ void Pacman::movePosition(int d, Tile map[36][28], SDL_Plotter& g)
     }
 
     moved = true;
-
 }
+
 void Pacman::erasePac(SDL_Plotter& g)
 {
     for(int x = -radius; x <= radius; x++)
@@ -288,6 +306,7 @@ void Pacman::erasePac(SDL_Plotter& g)
         }
     }
 }
+
 void Pacman::drawPac(SDL_Plotter& g)
 {
     for(int x = -radius; x <= radius; x++)
@@ -411,4 +430,5 @@ void Pacman::drawPac(SDL_Plotter& g)
             }
         }
     }
+
 }
