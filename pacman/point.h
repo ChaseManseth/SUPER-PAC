@@ -4,7 +4,7 @@
 * Assignment Title:  Pacman Group Project
 * Assignment Description: User can play a faithfully recreated
 * version of pacman.
-* Due Date: 11/29/2017
+* Due Date: 12/4/2017
 * Date Created: 11/1/2017
 * Date Last Modified: 11/11/2017
 */
@@ -16,20 +16,20 @@ struct Point
 {
     double x, y;
     /*
-     *  Description:
-     *  Return:
-     *  Precondition:
-     *  Postcondition:
+     *  Description: Blank constructor for a Point object
+     *  Return: none
+     *  Precondition: none
+     *  Postcondition: x and y are assigned 0
      */
     Point()
     {
         x = y = 0;
     }
     /*
-     *  Description:
-     *  Return:
-     *  Precondition:
-     *  Postcondition:
+     *  Description: Constructor for a Point object
+     *  Return: none
+     *  Precondition: a and b exist
+     *  Postcondition: x and y are assigned a and b respectively
      */
     Point(double a, double b)
     {
