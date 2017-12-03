@@ -6,7 +6,7 @@
 * version of pacman.
 * Due Date: 12/4/2017
 * Date Created: 11/1/2017
-* Date Last Modified: 12/2/2017
+* Date Last Modified: 12/3/2017
 */
 
 /*
@@ -77,6 +77,7 @@ int main(int argc, char** argv)
     int nums[10][25][25];
     int lets[26][25][25];
     int graphic[31][25][25];
+    int ghosts[4][25][25];
 
     bool releaseCalled = false;
     bool rando    = false;
@@ -87,7 +88,7 @@ int main(int argc, char** argv)
     Pacman pac(26,13);
     Tile map[36][28];
     // Initialize map and everything in it
-    init(map, g, nums, lets, graphic);
+    init(map, g, nums, lets, graphic, ghosts);
 
     Color blink(255,20,20);
     Ghost blinky(blink, map);
@@ -131,10 +132,10 @@ int main(int argc, char** argv)
 
     pac.drawPac(g);
 
-    pinky.draw(g, map);
-    inky.draw(g, map);
-    blinky.draw(g, map);
-    clyde.draw(g, map);
+    pinky.draw(g, ghosts, 3);
+    inky.draw(g, ghosts, 0);
+    blinky.draw(g, ghosts, 2);
+    clyde.draw(g, ghosts, 1);
 
     g.update();
 
@@ -161,7 +162,7 @@ int main(int argc, char** argv)
                 int lives = pac.getLives();
                 //make new pacman
                 pac = Pacman(26, 13);
-                init(map, g, nums, lets, graphic);
+                init(map, g, nums, lets, graphic, ghosts);
                 pac.setScore(score);
                 pac.setLives(lives + 1);
 
@@ -176,10 +177,10 @@ int main(int argc, char** argv)
                 pinky.setColor(pink);
                 clyde.setColor(cly);
 
-                pinky.draw(g, map);
-                inky.draw(g, map);
-                blinky.draw(g, map);
-                clyde.draw(g, map);
+                pinky.draw(g, ghosts, 3);
+                inky.draw(g, ghosts, 0);
+                blinky.draw(g, ghosts, 2);
+                clyde.draw(g, ghosts, 1);
 
                 drawLetter(g, 2, 1, s);
                 drawLetter(g, 3, 1, c);
@@ -240,7 +241,7 @@ int main(int argc, char** argv)
                 {
                     pinky.move(map, g);
                 }
-                pinky.draw(g, map);
+                pinky.draw(g, ghosts, 3);
                 blinky.target(pac);
                 //blinky is fastest
                 if(i % 3 == 0)
@@ -248,11 +249,11 @@ int main(int argc, char** argv)
                     blinky.move(map, g);
                 }
                 blinky.move(map, g);
-                blinky.draw(g, map);
+                blinky.draw(g, ghosts, 2);
                 inky.target(pac);
                 //inky is normal speed
                 inky.move(map, g);
-                inky.draw(g, map);
+                inky.draw(g, ghosts, 0);
                 clyde.target(pac);
                 //clyde is second fastest
                 if(i % 5 == 0)
@@ -260,7 +261,7 @@ int main(int argc, char** argv)
                     clyde.move(map, g);
                 }
                 clyde.move(map, g);
-                clyde.draw(g, map);
+                clyde.draw(g, ghosts, 1);
                 //check collision with any ghosts
                 if(clyde.isCollide(map, pac, g) || inky.isCollide(map, pac, g)
                    || blinky.isCollide(map, pac, g) || pinky.isCollide(map, pac, g))
@@ -284,7 +285,7 @@ int main(int argc, char** argv)
                     Mix_PlayChannel( -1, gGame_Over, 0 );
                     g.Sleep(4000);
                     pac = Pacman(26, 13);
-                    init(map, g, nums, lets, graphic);
+                    init(map, g, nums, lets, graphic, ghosts);
                     Mix_ResumeMusic();
 
                     drawLetter(g, 2, 1, s);
@@ -384,10 +385,10 @@ int main(int argc, char** argv)
 
                 }
 
-                blinky.draw(g, map);
-                inky.draw(g, map);
-                pinky.draw(g, map);
-                clyde.draw(g, map);
+                pinky.draw(g, ghosts, 3);
+                inky.draw(g, ghosts, 0);
+                blinky.draw(g, ghosts, 2);
+                clyde.draw(g, ghosts, 1);
 
                 //after some seconds, set pacman back to vulnerable
                 if(counter == 12 || (!blinky.getActive() && !inky.getActive()

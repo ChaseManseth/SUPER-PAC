@@ -4,9 +4,9 @@
 * Assignment Title:  Pacman Group Project
 * Assignment Description: User can play a faithfully recreated
 * version of pacman.
-* Due Date: 11/29/2017
+* Due Date: 12/4/2017
 * Date Created: 11/1/2017
-* Date Last Modified: 11/12/2017
+* Date Last Modified: 12/3/2017
 */
 
 #include "ghosts.h"
@@ -360,30 +360,30 @@ void Ghost::target(Pacman pac){
     targetR = pac.getR();
 }
 
-void Ghost::draw(SDL_Plotter& g, Tile map[36][28])const{
-    for(int x = -radius; x <= radius; x++)
+void Ghost::draw(SDL_Plotter& g, int ghosts[4][25][25], int n)const{
+    int xVal = center.x-12;
+    int yVal = center.y-12;
+    for(int row = 0; row < 25; row++)
     {
-        for(int y = -radius; y <= radius; y++)
+        for(int col = 0; col < 25; col++)
         {
-            if(sqrt(x * x + y * y) <= radius)
-            {
-                g.plotPixel(center.x + x, center.y + y, color.R, color.G, color.B);
-
+            if(ghosts[n][row][col] == 1){
+                g.plotPixel(xVal+col, yVal+row, color.R, color.G, color.B);
+            }
+            else if(ghosts[n][row][col] == 2){
+                g.plotPixel(xVal+col, yVal+row,255,255,255);
             }
         }
     }
-
 }
 void Ghost::erase(SDL_Plotter& g, Tile map[36][28])const{
-    for(int x = -radius; x <= radius; x++)
+    int xVal = center.x-12;
+    int yVal = center.y-12;
+    for(int row = 0; row < 25; row++)
     {
-        for(int y = -radius; y <= radius; y++)
+        for(int col = 0; col < 25; col++)
         {
-            if(sqrt(x * x + y * y) <= radius)
-            {
-                g.plotPixel(center.x + x, center.y + y, 0, 0, 0);
-            }
+            g.plotPixel(xVal+col, yVal+row,0,0,0);
         }
     }
-
 }

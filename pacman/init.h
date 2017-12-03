@@ -4,15 +4,18 @@
 * Assignment Title:  Pacman Group Project
 * Assignment Description: User can play a faithfully recreated
 * version of pacman.
-* Due Date: 11/29/2017
+* Due Date: 12/4/2017
 * Date Created: 11/1/2017
-* Date Last Modified: 11/11/2017
+* Date Last Modified: 12/3/2017
 */
 #ifndef INIT_H_INCLUDED
 #define INIT_H_INCLUDED
 
 #include "SDL_Plotter.h"
 #include <fstream>
+#include <string>
+
+using namespace std;
 
 /*
  *  Description: This function is used to initialize the entire map.
@@ -21,13 +24,15 @@
  *  Precondition: It requires a Tile map, SDL_Plotter object, and three int arrays
  *  Postcondition: N/A
  */
-void init(Tile map[36][28], SDL_Plotter& g, int nums[10][25][25], int lets[26][25][25], int graphic[31][25][25]) {
-    ifstream inMap, inGraphicsVal, inGraphics;
+void init(Tile map[36][28], SDL_Plotter& g, int nums[10][25][25], int lets[26][25][25], int graphic[31][25][25], int ghosts[4][25][25]) {
+    ifstream inMap, inGraphicsVal, inGraphics, inGhosts;
     bool readBool;
     int graphicVal, garb;
+    string trash;
 
 
     inMap.open("MapTextReference/MAPTEXT.txt");
+    inGhosts.open("ghostImages.txt");
     inGraphicsVal.open("MapTextReference/WALLS.txt");
     inGraphics.open("MapTextReference/WallGraphics.txt");
 
@@ -78,6 +83,13 @@ void init(Tile map[36][28], SDL_Plotter& g, int nums[10][25][25], int lets[26][2
             map[r][c].setGraphicVal(graphicVal);
         }
     }
+    for(int i =0; i < 4; i++){
+        for(int r = 0; r < 25; r++){
+            for(int c = 0; c < 25; c++){
+                inGhosts >> ghosts[i][r][c];
+            }
+        }
+    }
 
     // Import all wall graphics
     for(int i = 0; i < 31; i++) {
@@ -103,6 +115,11 @@ void init(Tile map[36][28], SDL_Plotter& g, int nums[10][25][25], int lets[26][2
     inMap.close();
     inGraphicsVal.close();
     inGraphics.close();
+    inGhosts.close();
+}
+
+void startMenu(SDL_Plotter& g){
+    //for(int x = 0; )
 }
 
 #endif // INIT_H_INCLUDED

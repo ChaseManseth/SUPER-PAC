@@ -4,9 +4,9 @@
 * Assignment Title:  Pacman Group Project
 * Assignment Description: User can play a faithfully recreated
 * version of pacman.
-* Due Date: 11/29/2017
+* Due Date: 12/4/2017
 * Date Created: 11/1/2017
-* Date Last Modified: 11/11/2017
+* Date Last Modified: 12/3/2017
 */
 
 #ifndef GHOSTS_H_INCLUDED
@@ -162,7 +162,7 @@ class Ghost{
          *  Precondition: none
          *  Postcondition: Ghost is drawn to plotter
          */
-        void draw(SDL_Plotter& g, Tile map[36][28])const;
+        void draw(SDL_Plotter& g,  int ghosts[4][25][25], int n)const;
 
         /*
          *  Description: erases the ghost from the plotter

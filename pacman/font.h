@@ -3,10 +3,10 @@
 * Will Rhoden, Bailey Stone
 * Assignment Title:  Pacman Group Project
 * Assignment Description: User can play a faithfully recreated
-*                         version of pacman.
+* version of pacman.
 * Due Date: 12/4/2017
-* Date Created: 11/19/2017
-* Date Last Modified: 12/1/2017
+* Date Created: 11/1/2017
+* Date Last Modified: 12/3/2017
 */
 
 #ifndef FONT_H_INCLUDED
