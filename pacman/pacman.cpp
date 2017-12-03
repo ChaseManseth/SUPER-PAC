@@ -94,6 +94,10 @@ void Pacman::setCenter(Point c)
 {
     center = c;
 }
+void Pacman::setRadius(int rad)
+{
+    radius = rad;
+}
 void Pacman::setR(int row)
 {
     r = row;

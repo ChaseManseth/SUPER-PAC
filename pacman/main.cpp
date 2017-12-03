@@ -72,6 +72,7 @@ int main(int argc, char** argv)
     Mix_Chunk *gPowerPellet = NULL;
     Mix_Chunk *gGame_Over   = NULL;
     Mix_Chunk *gBegin       = NULL;
+
     char key;
     // Graphic Arrays
     int nums[10][25][25];
@@ -84,6 +85,8 @@ int main(int argc, char** argv)
     int numEaten  = 0;
     int counter   = 0;
     SDL_Plotter g(900,700);
+
+    startMenu(g);
 
     Pacman pac(26,13);
     Tile map[36][28];
@@ -284,6 +287,9 @@ int main(int argc, char** argv)
                     Mix_PauseMusic();
                     Mix_PlayChannel( -1, gGame_Over, 0 );
                     g.Sleep(4000);
+
+                    startMenu(g);
+
                     pac = Pacman(26, 13);
                     init(map, g, nums, lets, graphic, ghosts);
                     Mix_ResumeMusic();

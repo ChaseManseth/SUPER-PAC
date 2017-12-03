@@ -684,7 +684,7 @@
 	"point.h"
 	<cmath>
 
-1512335178 c:\users\steudel\desktop\super-pac-master\pacman\pacman.h
+1512339747 c:\users\steudel\desktop\super-pac-master\pacman\pacman.h
 	"point.h"
 	"color.h"
 	"line.h"
@@ -706,7 +706,7 @@
 1512334809 source:c:\users\steudel\desktop\super-pac-master\pacman\line.cpp
 	"line.h"
 
-1512337596 source:c:\users\steudel\desktop\super-pac-master\pacman\main.cpp
+1512340765 source:c:\users\steudel\desktop\super-pac-master\pacman\main.cpp
 	<iostream>
 	<fstream>
 	"pacman.h"
@@ -715,10 +715,12 @@
 	"init.h"
 	"font.h"
 
-1512337652 c:\users\steudel\desktop\super-pac-master\pacman\init.h
+1512340862 c:\users\steudel\desktop\super-pac-master\pacman\init.h
 	"SDL_Plotter.h"
 	<fstream>
 	<string>
+	"font.h"
+	"pacman.h"
 
 1512335177 c:\users\steudel\desktop\super-pac-master\pacman\font.h
 	"SDL_Plotter.h"
@@ -736,7 +738,7 @@
 	<iostream>
 	<fstream>
 
-1512337652 source:c:\users\steudel\desktop\super-pac-master\pacman\pacman.cpp
+1512339747 source:c:\users\steudel\desktop\super-pac-master\pacman\pacman.cpp
 	"pacman.h"
 	"tile.h"
 	<cstdlib>

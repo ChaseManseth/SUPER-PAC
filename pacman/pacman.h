@@ -140,18 +140,25 @@ class Pacman
          *  Postcondition: nextDir is assigned the value of d
          */
          void setNextDir(int d);
-        /*
+         /*
+         *  Description: Assigns radius the value of rad
+         *  Return: none
+         *  Precondition: rad exists
+         *  Postcondition: radius is assigned the value of rad
+         */
+         void setRadius(int rad);
+         /*
          *  Description: Assigns state the value of st
          *  Return: none
          *  Precondition: st exists
-         *  Postcondition: r is assigned the value of row
+         *  Postcondition: state is assigned the value of row
          */
         void setState(int st);
         /*
          *  Description: Assigns center the value of c
          *  Return: none
          *  Precondition: row exists
-         *  Postcondition: r is assigned the value of row
+         *  Postcondition: center is assigned the value of c
          */
         void setCenter(Point c);
         /*
